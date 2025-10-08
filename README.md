@@ -51,7 +51,7 @@
 ## 📙 swot
 <img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
 
-## 📙 grefico gant
+## 📙 grafico gant
 <img src="api/fotos/atividade 4.jpeg" alt="grefico gant" width="600"/>
 
 ## Checklist de Testes – Projeto
