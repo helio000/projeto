@@ -4,48 +4,43 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL") // A URL de conexão estará no .env
 }
 
 model Aluno {
-  id          Int        @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   nome        String
-  email       String     @unique
+  email       String   @unique
   telefone    String
-  datanasc    DateTime?
+  datanasc    DateTime? // Mapeando o campo DATETIME
   arteMarcial String
-  RA          Int        @unique
-  matriculas  Matricula[]  // Relação com Matricula
+  RA          Int      @unique
+  Matricula   Matricula[]
 }
 
 model Matricula {
-  id            Int       @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   alunoId       Int
   turmaId       Int
-  dataMatricula DateTime? @default(dbgenerated("(curdate())")) @db.Date
-  aluno         Aluno     @relation(fields: [alunoId], references: [id])
-  turma         Turma     @relation(fields: [turmaId], references: [id])
-
-  @@index([alunoId])
-  @@index([turmaId])
+  dataMatricula DateTime? @default(now())
+  aluno         Aluno    @relation(fields: [alunoId], references: [id])
+  turma         Turma    @relation(fields: [turmaId], references: [id])
 }
 
 model Professor {
-  id          Int        @id @default(autoincrement())
-  nome        String     @db.VarChar(100)
-  email       String     @unique @db.VarChar(100)
-  telefone    String?    @db.VarChar(20)
-  arteMarcial String?    @db.VarChar(50)
-  turmas      Turma[]
+  id          Int      @id @default(autoincrement())
+  nome        String
+  email       String   @unique
+  telefone    String?
+  arteMarcial String?
+  Turma       Turma[]
 }
 
 model Turma {
   id          Int        @id @default(autoincrement())
-  nome        String     @db.VarChar(50)
-  arteMarcial String?    @db.VarChar(50)
+  nome        String
+  arteMarcial String?
   professorId Int?
-  matriculas  Matricula[]
   professor   Professor? @relation(fields: [professorId], references: [id])
-
-  @@index([professorId])
+  Matricula   Matricula[]
 }
