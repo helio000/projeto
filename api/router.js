@@ -1,11 +1,11 @@
 const express = require('express');
 const routes = express.Router();
 
-const Aluno = require('./controllers/aluno');
-const Professor = require('./controllers/professor');
-const Telefone = require('./controllers/telefone');
-const Turma = require('./controllers/turma');
-const Matricula = require('./controllers/matricula');
+const Aluno = require('./src/controllers/aluno');
+const Professor = require('./src/controllers/professor');
+const Telefone = require('./src/controllers/telefone');
+const Turma = require('./src/controllers/turma');
+const Matricula = require('./src/controllers/matricula');
 
 // Rota inicial
 routes.get('/', (req, res) => {
