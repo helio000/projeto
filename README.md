@@ -51,6 +51,69 @@
 ## 📙 swot
 <img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
 
+## 📙 grefico gant
+<img src="api/fotos/atividade 4.jpeg" alt="grefico gant" width="600"/>
+
+## Checklist de Testes – Projeto
+## Testes Gerais
+
+Verificar se o endpoint / retorna 200 e informações da API.
+
+## Testes de Alunos
+
+[x]Criar aluno (POST /alunos) → verificar campos obrigatórios e email único.
+
+[x]Listar todos alunos (GET /alunos) → deve retornar lista completa.
+
+[x]Obter aluno por ID (GET /alunos/:id) → 200 se existir, 404 se não existir.
+
+[]Atualizar aluno (PUT/PATCH /alunos/:id) → alterar campos opcionais, mantendo email único.
+
+[x]Remover aluno (DELETE /alunos/:id) → 200 ou 204.
+
+[x]Login do aluno (POST /alunos/login) → com credenciais válidas retorna token; inválidas retorna 400.
+
+[x]Validar token do aluno (GET /alunos/login) → 200 com token válido; 401 com token inválido/expirado.
+
+## Testes de Professores
+
+[x]Criar professor (POST /professores) → verificar campos obrigatórios e email único.
+
+[x]Listar todos professores (GET /professores) → deve retornar lista completa.
+
+[x]Obter professor por ID (GET /professores/:id) → 200 se existir, 404 se não existir.
+
+[x]Atualizar professor (PUT/PATCH /professores/:id) → alterar campos opcionais, mantendo email único.
+
+[x]Remover professor (DELETE /professores/:id) → 200 ou 204.
+
+
+
+## Testes de Turmas
+
+[x]Criar turma (POST /turmas) → verificar campos obrigatórios.
+
+[x]Listar todas turmas (GET /turmas) → deve retornar lista completa.
+
+[x]Obter turma por ID (GET /turmas/:id) → 200 se existir, 404 se não existir.
+
+[x]Atualizar turma (PUT/PATCH /turmas/:id) → alterar campos opcionais.
+
+[x]Remover turma (DELETE /turmas/:id) → 200 ou 204.
+
+## Testes de Matrículas
+
+[x]Criar matrícula (POST /matriculas) → verificar campos obrigatórios, relacionamentos válidos com aluno e turma.
+
+[x]Listar todas matrículas (GET /matriculas) → deve retornar lista completa.
+
+[x]Obter matrícula por ID (GET /matriculas/:id) → 200 se existir, 404 se não existir.
+
+[x]Atualizar matrícula (PUT/PATCH /matriculas/:id) → alterar campos opcionais.
+
+[x]Remover matrícula (DELETE /matriculas/:id) → 200 ou 204.
+
+
 
 ## Passo a passo para testar
 - 1 Clone este repositório
