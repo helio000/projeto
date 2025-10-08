@@ -42,17 +42,17 @@
 ## 📙 Diagrama do Projeto
 <img src="api/imagem/diagrama.jpeg" alt="Diagrama geral" width="600"/>
  
-## 📙 canva
+## 💀 canva
  <img src="api/imagem/atividade.jpeg" alt="canva" width="600"/>
 
-## 📙 triangulo de ferro
+## 👽 triangulo de ferro
 <img src="api/imagem/atividade 2.jpeg" alt="triangulo de ferro" width="600"/>
 
-## 📙 swot
+## 🫡 swot
 <img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
 
-## 📙 grafico gant
-<img src="api/fotos/atividade 4.jpeg" alt="grefico gant" width="600"/>
+## 🫢 grefico gant
+<img src="api/imagem/atividade 4 (1).jpeg" alt="grefico gant" width="600"/>
 
 ## Checklist de Testes – Projeto
 ## Testes Gerais
