@@ -51,8 +51,10 @@
 ## 🫡 swot
 <img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
 
-## 👨‍🦽‍➡️ grefico gant
-<img src="api/imagem/atividade 4 (1).jpeg" alt="grefico gant" width="600"/>
+## Repositórios do Projeto
+
+- [Front-End (Web)](https://github.com/helio000/web-projeto2)
+- [Back-End (API)](https://github.com/helio000/back-projeto-2025)
 
 ## Checklist de Testes – Projeto
 ## Testes Gerais
