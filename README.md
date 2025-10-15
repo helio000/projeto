@@ -55,7 +55,7 @@
 
 - [Front-End (Web)](https://github.com/helio000/web-projeto2)
 - [Back-End (API)](https://github.com/helio000/back-projeto-2025)
-- [mobile-projeto (app)](https://github.com/helio000/mobile-projeto)
+- [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
 ## Checklist de Testes – Projeto
 ## Testes Gerais
 
