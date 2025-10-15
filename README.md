@@ -14,7 +14,7 @@
 - [Back-End (API)](https://github.com/helio000/back-projeto-2025)
 - [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
 
-<<<<<<< HEAD
+
 ## testes do moblie
 ## teste 01
 <img src="web/fotos/aplicativo.png" alt="teste1" width="350"/>
