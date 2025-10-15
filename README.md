@@ -17,16 +17,16 @@
 
 ## testes do moblie
 ## teste 01
-<img src="web/fotos/aplicativo.png" alt="teste1" width="350"/>
+<img src="web/fotos/aplicativo.png" alt="teste1" width="600"/>
 
 ##  teste 2
-<img src="web/fotos/aplicativo2.png" alt="teste 2" width="350"/>
+<img src="web/fotos/aplicativo2.png" alt="teste 2" width="600"/>
 
 ## teste 3
-<img src="web/fotos/aplicativo3.png" alt="teste 3" width="350"/>
+<img src="web/fotos/aplicativo3.png" alt="teste 3" width="600"/>
 
 ## teste 4
-<img src="web/fotos/aplicativo4.png" alt="teste 4" width="350"/>
+<img src="web/fotos/aplicativo4.png" alt="teste 4" width="600"/>
 
 
 
