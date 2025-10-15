@@ -9,6 +9,11 @@
 |João Santos|Front/Banco de Dados|
 |Rhayssa|Front/Banco de Dados|
 
+## Repositórios do Projeto
+- [Front-End (Web)](https://github.com/helio000/web-projeto2)
+- [Back-End (API)](https://github.com/helio000/back-projeto-2025)
+- [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
+
 ## BackLog
 - [x] Criar/atualizar o cronograma
 - [x] Modelar o negócio no Quadro Canvas
@@ -51,11 +56,7 @@
 ## 🫡 swot
 <img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
 
-## Repositórios do Projeto
 
-- [Front-End (Web)](https://github.com/helio000/web-projeto2)
-- [Back-End (API)](https://github.com/helio000/back-projeto-2025)
-- [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
 ## Checklist de Testes – Projeto
 ## Testes Gerais
 
