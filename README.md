@@ -17,6 +17,7 @@
 
 ## testes do moblie
 ## teste 01
+<<<<<<< HEAD
 <img src="web/fotos/aplicativo.png" alt="teste1" width="350"/>
 
 ##  teste 2
@@ -27,6 +28,18 @@
 
 ## teste 4
 <img src="web/fotos/aplicativo4.png" alt="teste 4" width="350"/>
+=======
+<img src="web/fotos/aplicativo.png" alt="teste1" width="1000"/>
+
+##  teste 2
+<img src="web/fotos/aplicativo2.png" alt="teste 2" width="1000"/>
+
+## teste 3
+<img src="web/fotos/aplicativo3.png" alt="teste 3" width="1000"/>
+
+## teste 4
+<img src="web/fotos/aplicativo4.png" alt="teste 4" width="1000"/>
+>>>>>>> d5b15078704b257280c9248f77e1426df6e3e7d1
 
 
 
