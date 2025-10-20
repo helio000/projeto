@@ -1,7 +1,7 @@
-# Artes Marciais
+# Artes Marciais (Martial arts)
 
-- Metodologia: Kanban
-- Tema inicial: Hangetsu Uzumaki - Artes Marciais
+- Metodologia: Kanban (- Methodology: Kanban)
+- Tema inicial: Hangetsu Uzumaki - Artes Marciais (- Initial theme: Hangetsu Uzumaki - Martial Arts)
 
 |Recursos|Papéis e Responsabilidades|
 |-|-|
@@ -9,92 +9,92 @@
 |João Santos|Front/Banco de Dados|
 |Rhayssa|Front/Banco de Dados|
 
-## Repositórios do Projeto
+## Repositórios do Projeto (Project Repositories)
 - [Front-End (Web)](https://github.com/helio000/web-projeto2)
 - [Back-End (API)](https://github.com/helio000/back-projeto-2025)
 - [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
 
 
 
-## Diagramas do Projeto
+## Diagramas do Projeto ()
 
-## 📘 Diagrama de Classes (Back‑End)
+## 📘 Diagrama de Classes (Back‑End) ()
 <img src="api/imagem/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
 
-## 📗 DCU do Projeto
+## 📗 DCU do Projeto ()
 <img src="api/imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
 
-## 📙 Diagrama do Projeto
+## 📙 Diagrama do Projeto ()
 <img src="api/imagem/diagrama.jpeg" alt="Diagrama geral" width="600"/>
  
-## 💀 canva
+## 💀 canva ()
  <img src="api/imagem/atividade.jpeg" alt="canva" width="600"/>
 
-## 👽 triangulo de ferro
+## 👽 triangulo de ferro ()
 <img src="api/imagem/atividade 2.jpeg" alt="triangulo de ferro" width="600"/>
 
-## 🫡 swot
+## 🫡 swot ()
 <img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
 
 
-## Checklist de Testes – Projeto
-## Testes Gerais
+## Checklist de Testes – Projeto ()
+## Testes Gerais ()
 
 Verificar se o endpoint / retorna 200 e informações da API.
 
-## Testes de Alunos
+## Testes de Alunos ()
 
-[x]Criar aluno (POST /alunos) → verificar campos obrigatórios e email único.
+[x]Criar aluno (POST /alunos) → verificar campos obrigatórios e email único.()
 
-[x]Listar todos alunos (GET /alunos) → deve retornar lista completa.
+[x]Listar todos alunos (GET /alunos) → deve retornar lista completa.()
 
-[x]Obter aluno por ID (GET /alunos/:id) → 200 se existir, 404 se não existir.
+[x]Obter aluno por ID (GET /alunos/:id) → 200 se existir, 404 se não existir.()
 
-[]Atualizar aluno (PUT/PATCH /alunos/:id) → alterar campos opcionais, mantendo email único.
+[]Atualizar aluno (PUT/PATCH /alunos/:id) → alterar campos opcionais, mantendo email único.()
 
-[x]Remover aluno (DELETE /alunos/:id) → 200 ou 204.
+[x]Remover aluno (DELETE /alunos/:id) → 200 ou 204.()
 
-[x]Login do aluno (POST /alunos/login) → com credenciais válidas retorna token; inválidas retorna 400.
+[x]Login do aluno (POST /alunos/login) → com credenciais válidas retorna token; inválidas retorna 400.()
 
-[x]Validar token do aluno (GET /alunos/login) → 200 com token válido; 401 com token inválido/expirado.
+[x]Validar token do aluno (GET /alunos/login) → 200 com token válido; 401 com token inválido/expirado.()
 
-## Testes de Professores
+## Testes de Professores()
 
-[x]Criar professor (POST /professores) → verificar campos obrigatórios e email único.
+[x]Criar professor (POST /professores) → verificar campos obrigatórios e email único.()
 
-[x]Listar todos professores (GET /professores) → deve retornar lista completa.
+[x]Listar todos professores (GET /professores) → deve retornar lista completa.()
 
-[x]Obter professor por ID (GET /professores/:id) → 200 se existir, 404 se não existir.
+[x]Obter professor por ID (GET /professores/:id) → 200 se existir, 404 se não existir.()
 
-[x]Atualizar professor (PUT/PATCH /professores/:id) → alterar campos opcionais, mantendo email único.
+[x]Atualizar professor (PUT/PATCH /professores/:id) → alterar campos opcionais, mantendo email único.()
 
-[x]Remover professor (DELETE /professores/:id) → 200 ou 204.
+[x]Remover professor (DELETE /professores/:id) → 200 ou 204.()
 
 
 
-## Testes de Turmas
+## Testes de Turmas()
 
-[x]Criar turma (POST /turmas) → verificar campos obrigatórios.
+[x]Criar turma (POST /turmas) → verificar campos obrigatórios.()
 
-[x]Listar todas turmas (GET /turmas) → deve retornar lista completa.
+[x]Listar todas turmas (GET /turmas) → deve retornar lista completa.()
 
-[x]Obter turma por ID (GET /turmas/:id) → 200 se existir, 404 se não existir.
+[x]Obter turma por ID (GET /turmas/:id) → 200 se existir, 404 se não existir.()
 
-[x]Atualizar turma (PUT/PATCH /turmas/:id) → alterar campos opcionais.
+[x]Atualizar turma (PUT/PATCH /turmas/:id) → alterar campos opcionais.()
 
-[x]Remover turma (DELETE /turmas/:id) → 200 ou 204.
+[x]Remover turma (DELETE /turmas/:id) → 200 ou 204.()
 
 ## Testes de Matrículas
 
-[x]Criar matrícula (POST /matriculas) → verificar campos obrigatórios, relacionamentos válidos com aluno e turma.
+[x]Criar matrícula (POST /matriculas) → verificar campos obrigatórios, relacionamentos válidos com aluno e turma.()
 
-[x]Listar todas matrículas (GET /matriculas) → deve retornar lista completa.
+[x]Listar todas matrículas (GET /matriculas) → deve retornar lista completa.()
 
-[x]Obter matrícula por ID (GET /matriculas/:id) → 200 se existir, 404 se não existir.
+[x]Obter matrícula por ID (GET /matriculas/:id) → 200 se existir, 404 se não existir.()
 
-[x]Atualizar matrícula (PUT/PATCH /matriculas/:id) → alterar campos opcionais.
+[x]Atualizar matrícula (PUT/PATCH /matriculas/:id) → alterar campos opcionais.()
 
-[x]Remover matrícula (DELETE /matriculas/:id) → 200 ou 204.
+[x]Remover matrícula (DELETE /matriculas/:id) → 200 ou 204.()
 
 
 
