@@ -15,19 +15,6 @@
 - [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
 
 
-## testes do moblie
-## teste 01
-<img src="web/fotos/aplicativo.png" alt="teste1" width="1000"/>
-
-##  teste 2
-<img src="web/fotos/aplicativo2.png" alt="teste 2" width="1000"/>
-
-## teste 3
-<img src="web/fotos/aplicativo3.png" alt="teste 3" width="1000"/>
-
-## teste 4
-<img src="web/fotos/aplicativo4.png" alt="teste 4" width="1000"/>
-
 
 
 
