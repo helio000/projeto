@@ -123,6 +123,15 @@ const updateNotas = async (req, res) => {
   }
 
   try {
+    // Verificando se o aluno existe
+    const alunoExistente = await prisma.aluno.findUnique({
+      where: { id: idNum }
+    });
+
+    if (!alunoExistente) {
+      return res.status(404).json({ error: 'Aluno não encontrado' });
+    }
+
     const alunoAtualizado = await prisma.aluno.update({
       where: { id: idNum },
       data: { notaTecnica, notaDisciplina, frequencia },

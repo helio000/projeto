@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-const { create, read, readOne, update, remove, login } = require('./src/controllers/aluno.js');
+const { create, read, readOne, update, remove, login, updateNotas } = require('./src/controllers/aluno.js');
 const {
   create: createProfessor,
   read: readProfessor,
@@ -28,6 +28,9 @@ app.delete('/alunos/:id', remove);
 // Login Alunos
 app.post('/alunos/login', login);
 
+// Rota para atualizar as notas dos alunos
+app.put('/alunos/:id/notas', updateNotas); // Rota para atualizar apenas as notas
+
 // Rotas Professores
 app.get('/professores', readProfessor);
 app.get('/professores/:id', readOneProfessor);
@@ -37,10 +40,10 @@ app.delete('/professores/:id', removeProfessor);
 
 // Rota inicial
 app.get('/', (req, res) => {
-    res.send('API funcionando!');
+  res.send('API funcionando!');
 });
 
 // Start do servidor
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
