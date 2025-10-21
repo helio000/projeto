@@ -12,6 +12,7 @@ routes.get('/', (req, res) => {
   return res.json({ titulo: 'PROJETO - Membros: Coronel, Cati e Rhay' });
 });
 
+
 // Rotas de Aluno
 routes.post('/alunos', Aluno.create);
 routes.get('/alunos', Aluno.read);
@@ -22,6 +23,10 @@ routes.delete('/alunos/:id', Aluno.remove);
 
 // Login do Aluno
 routes.post('/alunos/login', Aluno.login);
+
+// Rota para atualizar apenas as notas do aluno
+routes.put('/alunos/:id/notas', Aluno.updateNotas);
+
 
 // Rotas de Professor
 routes.post('/professores', Professor.create);

@@ -16,8 +16,7 @@ const create = async (req, res) => {
     }
 
     if (!RA) {
-      // Gera RA aleatório de 6 dígitos se não for informado
-      RA = Math.floor(100000 + Math.random() * 900000);
+      RA = Math.floor(100000 + Math.random() * 900000); // Gera RA aleatório
     }
 
     const existingAluno = await prisma.aluno.findUnique({
@@ -104,6 +103,38 @@ const update = async (req, res) => {
   }
 };
 
+// Atualizar apenas as notas
+const updateNotas = async (req, res) => {
+  const idNum = parseInt(req.params.id);
+  if (isNaN(idNum)) return res.status(400).json({ error: "ID inválido" });
+
+  const { notaTecnica, notaDisciplina, frequencia } = req.body;
+
+  // Verificação para garantir que as notas estejam entre 0 e 10
+  if (
+    notaTecnica == null || 
+    notaDisciplina == null || 
+    frequencia == null || 
+    notaTecnica < 0 || notaTecnica > 10 || 
+    notaDisciplina < 0 || notaDisciplina > 10 || 
+    frequencia < 0 || frequencia > 100
+  ) {
+    return res.status(400).json({ error: "Notas inválidas! As notas devem estar entre 0 e 10 e a frequência entre 0 e 100." });
+  }
+
+  try {
+    const alunoAtualizado = await prisma.aluno.update({
+      where: { id: idNum },
+      data: { notaTecnica, notaDisciplina, frequencia },
+    });
+
+    res.status(200).json(alunoAtualizado);
+  } catch (error) {
+    console.error("Erro em updateNotas aluno:", error);
+    res.status(500).json({ error: "Erro ao atualizar notas." });
+  }
+};
+
 // Remover aluno
 const remove = async (req, res) => {
   const idNum = parseInt(req.params.id);
@@ -145,5 +176,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { create, read, readOne, update, remove, login };
-
+module.exports = { create, read, readOne, update, remove, login, updateNotas };

@@ -30,9 +30,11 @@ model Matricula {
 model Professor {
   id          Int      @id @default(autoincrement())
   nome        String
+  cpf         String   @unique
   email       String   @unique
   telefone    String?
   arteMarcial String?
+  datanasc    DateTime?  // ADICIONADO
   Turma       Turma[]
 }
 

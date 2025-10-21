@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala de Professores</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-image: url('fotos/fundoForm2.png');
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+h2 { margin-top: 20px; text-shadow: 1px 1px 5px black; }
+#filtros, #lista-professores { width: 90%; max-width: 800px; }
+#filtros { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
+#filtros button { padding: 8px 15px; border: none; border-radius: 5px; background-color: #28a745; cursor: pointer; color: white; }
+#filtros button:hover { background-color: #218838; }
+.professor, .aluno { background-color: rgba(0,0,0,0.7); padding: 15px; border-radius: 10px; margin-bottom: 10px; }
+.aluno { margin-left: 20px; background-color: rgba(0,0,50,0.6); }
+.notas-btn { padding: 5px 10px; border: none; border-radius: 5px; background-color: #007bff; cursor: pointer; color: white; margin-top: 5px; }
+.notas-btn:hover { background-color: #0056b3; }
+#voltar-home { margin-top: auto; margin-bottom: 20px; padding: 10px 20px; border-radius: 5px; border: none; background-color: red; cursor: pointer; }
+#voltar-home:hover { background-color: darkred; }
+
+/* Estilo novo para as notas */
+.notas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 8px;
+    border-radius: 5px;
+}
+.nota-item {
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<h2>Sala de Professores</h2>
+<div id="filtros">
+    <button data-arte="">Todos</button>
+    <button data-arte="capoeira">Capoeira</button>
+    <button data-arte="jiu-jitsu">Jiu-Jitsu</button>
+    <button data-arte="karate">Karatê</button>
+</div>
+<div id="lista-professores"></div>
+
+<button id="voltar-home">Voltar para tela inicial</button>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const listaProfessores = document.getElementById("lista-professores");
+    const botoes = document.querySelectorAll("#filtros button");
+
+    document.getElementById("voltar-home").addEventListener("click", () => {
+        window.location.href = "home.html";
+    });
+
+    let professores = [];
+    let alunos = [];
+
+    async function carregarDados() {
+        try {
+            const [resProf, resAlu] = await Promise.all([
+                fetch('http://localhost:3100/professores'),
+                fetch('http://localhost:3100/alunos')
+            ]);
+            professores = await resProf.json();
+            alunos = await resAlu.json();
+            atualizarLista();
+        } catch (err) {
+            console.error("Erro ao carregar dados:", err);
+        }
+    }
+
+    function atualizarLista(filtro = "") {
+        listaProfessores.innerHTML = "";
+        professores.forEach(prof => {
+            const divProf = document.createElement("div");
+            divProf.classList.add("professor");
+            divProf.innerHTML = `<p><strong>Nome:</strong> ${prof.nome}</p>
+                                 <p><strong>Arte Marcial:</strong> ${prof.arteMarcial || '-'}</p>`;
+
+            const alunosFiltrados = alunos.filter(a => !filtro || a.arteMarcial === filtro);
+            alunosFiltrados.forEach(aluno => {
+                const divAlu = document.createElement("div");
+                divAlu.classList.add("aluno");
+
+                const notaTecnica = aluno.notaTecnica ?? "";
+                const disciplina = aluno.notaDisciplina ?? "";
+                const frequencia = aluno.frequencia ?? "";
+
+                const media = (notaTecnica && disciplina) ? ((notaTecnica + disciplina)/2).toFixed(1) : "";
+                const aprovado = media ? (media >= 6 && frequencia >= 75) : "";
+
+                divAlu.innerHTML = `
+                    <p><strong>Aluno:</strong> ${aluno.nome} (RA: ${aluno.RA})</p>
+                    <p><strong>Arte Marcial:</strong> ${aluno.arteMarcial}</p>
+                    <div class="notas-container">
+                        <div class="nota-item"><strong>Técnica:</strong> ${notaTecnica}</div>
+                        <div class="nota-item"><strong>Disciplina:</strong> ${disciplina}</div>
+                        <div class="nota-item"><strong>Frequência:</strong> ${frequencia}%</div>
+                        ${aprovado !== "" ? `<div class="nota-item"><strong>Situação:</strong> ${aprovado ? "Aprovado ✅" : "Reprovado ❌"}</div>` : ""}
+                    </div>
+                    <button class="notas-btn">Dar / Alterar Notas</button>
+                `;
+                divProf.appendChild(divAlu);
+
+                divAlu.querySelector(".notas-btn").addEventListener("click", async () => {
+                    await abrirNotas(aluno, divAlu);
+                });
+            });
+
+            listaProfessores.appendChild(divProf);
+        });
+    }
+
+    async function abrirNotas(aluno, divAlu) {
+        const input = prompt(`Dar notas para ${aluno.nome} (formato: notaTecnica,disciplina,frequencia):`, 
+            `${aluno.notaTecnica ?? 0},${aluno.notaDisciplina ?? 0},${aluno.frequencia ?? 0}`);
+        if (!input) return;
+        const [notaTecnica, disciplina, frequencia] = input.split(',').map(Number);
+        if (isNaN(notaTecnica) || isNaN(disciplina) || isNaN(frequencia)) {
+            alert("Notas inválidas!");
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3100/alunos/${aluno.id}/notas`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ notaTecnica, notaDisciplina: disciplina, frequencia })
+            });
+
+            const resultado = await res.json();
+            if (!res.ok) throw new Error(resultado.error || "Erro ao salvar notas");
+
+            aluno.notaTecnica = notaTecnica;
+            aluno.notaDisciplina = disciplina;
+            aluno.frequencia = frequencia;
+
+            const media = ((notaTecnica + disciplina)/2).toFixed(1);
+            const aprovado = media >= 6 && frequencia >= 75;
+
+            divAlu.querySelector(".notas-container").innerHTML = `
+                <div class="nota-item"><strong>Técnica:</strong> ${notaTecnica}</div>
+                <div class="nota-item"><strong>Disciplina:</strong> ${disciplina}</div>
+                <div class="nota-item"><strong>Frequência:</strong> ${frequencia}%</div>
+                <div class="nota-item"><strong>Situação:</strong> ${aprovado ? 'Aprovado ✅' : 'Reprovado ❌'}</div>
+            `;
+
+            alert("Notas atualizadas com sucesso!");
+        } catch (err) {
+            console.error(err);
+            alert("Erro ao atualizar notas!");
+        }
+    }
+
+    botoes.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const arte = btn.getAttribute("data-arte");
+            atualizarLista(arte);
+        });
+    });
+
+    carregarDados();
+});
+</script>
+
+</body>
+</html>
