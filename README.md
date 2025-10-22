@@ -9,6 +9,12 @@
 |João Santos|Front/Banco de Dados|
 |Rhayssa|Front/Banco de Dados|
 
+|Resources|Roles and Responsibilities|
+|-|-|
+|Hélio|Back/Test/Database|
+|João Santos|Front/Database|
+|Rhayssa|Front/Database|
+
 ## Repositórios do Projeto (Project Repositories)
 - [Front-End (Web)](https://github.com/helio000/web-projeto2)
 - [Back-End (API)](https://github.com/helio000/back-projeto-2025)
