@@ -8,7 +8,8 @@ const {
   read: readProfessor,
   readOne: readOneProfessor,
   update: updateProfessor,
-  remove: removeProfessor
+  remove: removeProfessor,
+  loginProfessor
 } = require('./src/controllers/professor.js');
 
 const app = express();
@@ -29,7 +30,7 @@ app.delete('/alunos/:id', remove);
 app.post('/alunos/login', login);
 
 // Rota para atualizar as notas dos alunos
-app.put('/alunos/:id/notas', updateNotas); // Rota para atualizar apenas as notas
+app.put('/alunos/:id/notas', updateNotas);
 
 // Rotas Professores
 app.get('/professores', readProfessor);
@@ -37,6 +38,9 @@ app.get('/professores/:id', readOneProfessor);
 app.post('/professores', createProfessor);
 app.put('/professores/:id', updateProfessor);
 app.delete('/professores/:id', removeProfessor);
+
+// Login Professores
+app.post('/professores/login', loginProfessor);
 
 // Rota inicial
 app.get('/', (req, res) => {

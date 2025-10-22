@@ -4,12 +4,14 @@ CREATE TABLE `Aluno` (
     `nome` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `telefone` VARCHAR(191) NOT NULL,
-    `datanasc` DATETIME(10) NULL,
+    `datanasc` DATETIME(3) NOT NULL,
     `arteMarcial` VARCHAR(191) NOT NULL,
     `RA` INTEGER NOT NULL,
+    `notaTecnica` DOUBLE NULL,
+    `notaDisciplina` DOUBLE NULL,
+    `frequencia` DOUBLE NULL,
 
     UNIQUE INDEX `Aluno_email_key`(`email`),
-    UNIQUE INDEX `Aluno_RA_key`(`RA`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -18,21 +20,22 @@ CREATE TABLE `Matricula` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `alunoId` INTEGER NOT NULL,
     `turmaId` INTEGER NOT NULL,
-    `dataMatricula` DATE NULL DEFAULT (curdate()),
+    `dataMatricula` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    INDEX `Matricula_alunoId_idx`(`alunoId`),
-    INDEX `Matricula_turmaId_idx`(`turmaId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Professor` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nome` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(100) NOT NULL,
-    `telefone` VARCHAR(20) NULL,
-    `arteMarcial` VARCHAR(50) NULL,
+    `nome` VARCHAR(191) NOT NULL,
+    `cpf` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `telefone` VARCHAR(191) NULL,
+    `arteMarcial` VARCHAR(191) NULL,
+    `datanasc` DATETIME(3) NULL,
 
+    UNIQUE INDEX `Professor_cpf_key`(`cpf`),
     UNIQUE INDEX `Professor_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -40,11 +43,10 @@ CREATE TABLE `Professor` (
 -- CreateTable
 CREATE TABLE `Turma` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nome` VARCHAR(50) NOT NULL,
-    `arteMarcial` VARCHAR(50) NULL,
+    `nome` VARCHAR(191) NOT NULL,
+    `arteMarcial` VARCHAR(191) NULL,
     `professorId` INTEGER NULL,
 
-    INDEX `Turma_professorId_idx`(`professorId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
