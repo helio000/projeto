@@ -22,6 +22,9 @@ const create = async (req, res) => {
     });
     if (cpfExists) return res.status(400).json({ error: 'CPF já cadastrado!' });
 
+    // Converte a data de nascimento corretamente
+    const dataNascimento = new Date(datanasc);  // Garantir que a data está no formato correto
+
     // Criação do professor no banco de dados
     const professor = await prisma.professor.create({
       data: {
@@ -29,7 +32,7 @@ const create = async (req, res) => {
         email: email.trim().toLowerCase(),
         telefone: telefone.trim(),
         arteMarcial: arteMarcial?.trim(),
-        datanasc: new Date(datanasc),
+        datanasc: dataNascimento,
         cpf: cpf.trim()
       },
     });
