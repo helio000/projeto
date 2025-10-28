@@ -1,123 +1,138 @@
-# Artes Marciais (Martial arts)
+# 🥋 Artes Marciais (Martial Arts)
 
-- Metodologia: Kanban (- Methodology: Kanban)
-- Tema inicial: Hangetsu Uzumaki - Artes Marciais (- Initial theme: Hangetsu Uzumaki - Martial Arts)
+* **Metodologia:** Kanban
+* **Tema inicial:** Hangetsu Uzumaki – Artes Marciais (Hangetsu Uzumaki – Martial Arts)
 
-|Recursos|Papéis e Responsabilidades|
-|-|-|
-|Hélio|Back/Teste/Banco de dados|
-|João Santos|Front/Banco de Dados|
-|Rhayssa|Front/Banco de Dados|
+---
 
-|Resources|Roles and Responsibilities|
-|-|-|
-|Hélio|Back/Test/Database|
-|João Santos|Front/Database|
-|Rhayssa|Front/Database|
+## 👥 Equipe (Team)
 
-## Repositórios do Projeto (Project Repositories)
-- [Front-End (Web)](https://github.com/helio000/web-projeto2)
-- [Back-End (API)](https://github.com/helio000/back-projeto-2025)
-- [mobile-projeto (app)](https://github.com/helio000/mobile-artes-marciais)
+| Recursos        | Papéis e Responsabilidades        |
+| --------------- | --------------------------------- |
+| **Hélio**       | Back-End / Teste / Banco de Dados |
+| **João Santos** | Front-End / Banco de Dados        |
+| **Rhayssa**     | Front-End / Banco de Dados        |
 
+| Resources       | Roles and Responsibilities |
+| --------------- | -------------------------- |
+| **Hélio**       | Back-End / Test / Database |
+| **João Santos** | Front-End / Database       |
+| **Rhayssa**     | Front-End / Database       |
 
+---
 
-## Diagramas do Projeto (Project Diagrams)
+## 📂 Repositórios do Projeto (Project Repositories)
 
-## 📘 Diagrama de Classes (Back‑End) (Class Diagram (Back-End))
-<img src="api/fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+* 🌐 [Front-End (Web)](https://github.com/helio000/web-projeto2)
+* ⚙️ [Back-End (API)](https://github.com/helio000/back-projeto-2025)
+* 📱 [Mobile (App)](https://github.com/helio000/mobile-artes-marciais)
 
-## 📗 DCU do Projeto (Project DCU ())
-<img src="api/imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
+---
 
-## 📙 Diagrama do Projeto (Project Diagram)
-<img src="api/imagem/diagrama.jpeg" alt="Diagrama geral" width="600"/>
- 
-## 💀 canva (canvas)
- <img src="api/imagem/atividade.jpeg" alt="canva" width="600"/>
+## 🧩 Diagramas do Projeto (Project Diagrams)
 
-## 👽 triangulo de ferro (iron triangle)
-<img src="api/imagem/atividade 2.jpeg" alt="triangulo de ferro" width="600"/>
+### 📘 Diagrama de Classes (Back-End)
 
-## 🫡 swot (swot)
-<img src="api/imagem/atividade 3.jpeg" alt="swot" width="600"/>
+<img src="fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
 
+---
 
-## Checklist de Testes – Projeto (Test Checklist – Project)
+### 📗 DCU do Projeto (Project DCU)
 
-## Testes Gerais (General Tests)
+<img src="imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
 
-Verificar se o endpoint / retorna 200 e informações da API. (Check if the / endpoint returns 200 and API information)
+---
 
-## Testes de Alunos (student tests)
+### 📙 Diagrama Geral do Projeto (Project Diagram)
 
-[x]Criar aluno (POST /alunos) → verificar campos obrigatórios e email único.(Create student (POST /students) → check required fields and unique email.())
+<img src="imagem/diagrama.jpeg" alt="Diagrama geral" width="600"/>
 
-[x]Listar todos alunos (GET /alunos) → deve retornar lista completa.(List all students (GET /students) → should return a complete list)
+---
 
-[x]Obter aluno por ID (GET /alunos/:id) → 200 se existir, 404 se não existir.(Get student by ID (GET /students/:id) → 200 if exists, 404 if doesn't)
+### 💀 Canva (Canvas)
 
-[]Atualizar aluno (PUT/PATCH /alunos/:id) → alterar campos opcionais, mantendo email único.(Update student (PUT/PATCH /students/:id) → change optional fields, keeping unique email)
+<img src="imagem/atividade.jpeg" alt="Canva" width="600"/>
 
-[x]Remover aluno (DELETE /alunos/:id) → 200 ou 204.(Remove student (DELETE /students/:id) → 200 or 204)
+---
 
-[x]Login do aluno (POST /alunos/login) → com credenciais válidas retorna token; inválidas retorna 400.(Student login (POST /students/login) → with valid credentials, returns token; with invalid credentials, returns 400)
+### 👽 Triângulo de Ferro (Iron Triangle)
 
-[x]Validar token do aluno (GET /alunos/login) → 200 com token válido; 401 com token inválido/expirado.(Validate student token (GET /students/login) → 200 with valid token; 401 with invalid/expired token)
+<img src="imagem/atividade 2.jpeg" alt="Triângulo de Ferro" width="600"/>
 
-## Testes de Professores(teacher tests)
+---
 
-[x]Criar professor (POST /professores) → verificar campos obrigatórios e email único.(Create class (POST /turmas) → check required fields. (Create class (POST /turmas) → check required fields.))
+### 🫡 SWOT (SWOT)
 
-[x]Listar todos professores (GET /professores) → deve retornar lista completa.(List all classes (GET /turmas) → should return a complete list)
+<img src="imagem/atividade 3.jpeg" alt="SWOT" width="600"/>
 
-[x]Obter professor por ID (GET /professores/:id) → 200 se existir, 404 se não existir.(Get class by ID (GET /turmas/:id) → 200 if it exists, 404 if it doesn't)
+---
 
-[x]Atualizar professor (PUT/PATCH /professores/:id) → alterar campos opcionais, mantendo email único.(Update class (PUT/PATCH /turmas/:id) → change optional fields)
+## ✅ Checklist de Testes – Projeto (Test Checklist – Project)
 
-[x]Remover professor (DELETE /professores/:id) → 200 ou 204.(Remove class (DELETE /turmas/:id) → 200 or 204)
+### ⚙️ Testes Gerais (General Tests)
 
+* [x] Verificar se o endpoint `/` retorna **200** e informações da API.
+  (Check if `/` endpoint returns 200 and API info)
 
+---
 
-## Testes de Turmas(class tests)
+### 🧑‍🎓 Testes de Alunos (Student Tests)
 
-[x]Criar turma (POST /turmas) → verificar campos obrigatórios.(Create class (POST /turmas) → check required fields)
+* [x] Criar aluno (POST /alunos) → verificar campos obrigatórios e email único.
+* [x] Listar todos alunos (GET /alunos) → deve retornar lista completa.
+* [x] Obter aluno por ID (GET /alunos/:id) → 200 se existir, 404 se não existir.
+* [ ] Atualizar aluno (PUT/PATCH /alunos/:id) → alterar campos opcionais, mantendo email único.
+* [x] Remover aluno (DELETE /alunos/:id) → 200 ou 204.
+* [x] Login do aluno (POST /alunos/login) → credenciais válidas retornam token.
+* [x] Validar token (GET /alunos/login) → 200 com token válido, 401 com inválido/expirado.
 
-[x]Listar todas turmas (GET /turmas) → deve retornar lista completa.()
+---
 
-[x]Obter turma por ID (GET /turmas/:id) → 200 se existir, 404 se não existir.()
+### 🥋 Testes de Professores (Teacher Tests)
 
-[x]Atualizar turma (PUT/PATCH /turmas/:id) → alterar campos opcionais.()
+* [x] Criar professor (POST /professores) → verificar campos obrigatórios e email único.
+* [x] Listar todos professores (GET /professores).
+* [x] Obter professor por ID (GET /professores/:id).
+* [x] Atualizar professor (PUT/PATCH /professores/:id).
+* [x] Remover professor (DELETE /professores/:id).
 
-[x]Remover turma (DELETE /turmas/:id) → 200 ou 204.()
+---
 
+### 🏫 Testes de Turmas (Class Tests)
 
-[x]Listar todas turmas (GET /turmas) → deve retornar lista completa.(List all classes (GET /turmas) → should return a complete list)
+* [x] Criar turma (POST /turmas).
+* [x] Listar todas turmas (GET /turmas).
+* [x] Obter turma por ID (GET /turmas/:id).
+* [x] Atualizar turma (PUT/PATCH /turmas/:id).
+* [x] Remover turma (DELETE /turmas/:id).
 
-[x]Obter turma por ID (GET /turmas/:id) → 200 se existir, 404 se não existir.(Get class by ID (GET /turmas/:id) → 200 if it exists, 404 if it doesn't)
+---
 
-[x]Atualizar turma (PUT/PATCH /turmas/:id) → alterar campos opcionais.(Update class (PUT/PATCH /turmas/:id) → change optional fields)
+### 🧾 Testes de Matrículas (Enrollment Tests)
 
-[x]Remover turma (DELETE /turmas/:id) → 200 ou 204.(Remove class (DELETE /turmas/:id) → 200 or 204)
+* [x] Criar matrícula (POST /matriculas).
+* [x] Listar todas matrículas (GET /matriculas).
+* [x] Obter matrícula por ID (GET /matriculas/:id).
+* [x] Atualizar matrícula (PUT/PATCH /matriculas/:id).
+* [x] Remover matrícula (DELETE /matriculas/:id).
 
-## Testes de Matrículas (enrollment tests)
+---
 
-[x]Criar matrícula (POST /matriculas) → verificar campos obrigatórios, relacionamentos válidos com aluno e turma.(Create enrollment (POST /enrollments) → check required fields, valid relationships with student and class.)
+## 🧭 Passo a Passo para Testar (How to Test)
 
-[x]Listar todas matrículas (GET /matriculas) → deve retornar lista completa.(List all enrollments (GET /enrollments) → should return a complete list)
+1. Clone este repositório
+2. Abra o projeto no **VS Code**
+3. Inicie o **MySQL** pelo **XAMPP** (ou outro método de sua preferência)
+4. Crie o arquivo `.env` dentro da pasta `api/` com o conteúdo:
 
-[x]Obter matrícula por ID (GET /matriculas/:id) → 200 se existir, 404 se não existir.(Get enrollment by ID (GET /enrollments/:id) → 200 if it exists, 404 if it doesn't)
-
-[x]Atualizar matrícula (PUT/PATCH /matriculas/:id) → alterar campos opcionais.(Update enrollment (PUT/PATCH /enrollments/:id) → change optional fields.)
-
-[x]Remover matrícula (DELETE /matriculas/:id) → 200 ou 204.(Remove enrollment (DELETE /enrollments/:id) → 200 or 204)
-
-
-
-## Passo a passo para testar
-- 1 Clone este repositório
-- 2 Abra o repositório com o VsCode, Abra um terminal **CTRL + '** cmd ou bash
-- 3 Abra o XAMPP e inicie o SGBD **MySQL**, ou inicie o MySQL da forma que preferir.
-- 4 Crie dentro da pasta ./api um arquivo chamado **.env** contendo as seguintes variáveis de ambiente:
-```js
+```env
 DATABASE_URL="mysql://root@localhost:3306/escola?schema=public&timezone=UTC"
+```
+
+5. Rode o servidor com:
+
+```bash
+npm run dev
+```
+
+6. Teste os endpoints no **Insomnia** ou **Postman** 🚀
