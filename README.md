@@ -33,37 +33,37 @@
 
 ### 📘 Diagrama de Classes (Back-End)
 
-<img src="fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+<img src="api/fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
 
 ---
 
 ### 📗 DCU do Projeto (Project DCU)
 
-<img src="imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
+<img src="api/fotos/DCU do projeto.jpeg" alt="Diagrama DCU" width="600"/>
 
 ---
 
 ### 📙 Diagrama Geral do Projeto (Project Diagram)
 
-<img src="imagem/diagrama.jpeg" alt="Diagrama geral" width="600"/>
+<img src="api/fotos/diagrama do projeto.jpeg" alt="Diagrama geral" width="600"/>
 
 ---
 
 ### 💀 Canva (Canvas)
 
-<img src="imagem/atividade.jpeg" alt="Canva" width="600"/>
+<img src="api/imagem/atividade.jpeg" alt="Canva" width="600"/>
 
 ---
 
 ### 👽 Triângulo de Ferro (Iron Triangle)
 
-<img src="imagem/atividade 2.jpeg" alt="Triângulo de Ferro" width="600"/>
+<img src="api/imagem/atividade 2.jpeg" alt="Triângulo de Ferro" width="600"/>
 
 ---
 
 ### 🫡 SWOT (SWOT)
 
-<img src="imagem/atividade 3.jpeg" alt="SWOT" width="600"/>
+<img src="api/imagem/atividade 3.jpeg" alt="SWOT" width="600"/>
 
 ---
 
