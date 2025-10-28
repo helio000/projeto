@@ -16,12 +16,12 @@ const create = async (req, res) => {
     }
 
     if (!RA) {
-      RA = Math.floor(100000 + Math.random() * 900000); // Gera RA aleatório
+      RA = Math.floor(100000 + Math.random() * 900000);
     }
 
     const existingAluno = await prisma.aluno.findUnique({
       where: { email: email.trim().toLowerCase() },
-    });
+    }).catch(() => null); // Evita travar se coluna não for unique
 
     if (existingAluno) {
       return res.status(400).json({ error: "Já existe um aluno cadastrado com este e-mail." });
@@ -110,7 +110,6 @@ const updateNotas = async (req, res) => {
 
   const { notaTecnica, notaDisciplina, frequencia } = req.body;
 
-  // Verificação para garantir que as notas estejam entre 0 e 10
   if (
     notaTecnica == null || 
     notaDisciplina == null || 
@@ -123,14 +122,8 @@ const updateNotas = async (req, res) => {
   }
 
   try {
-    // Verificando se o aluno existe
-    const alunoExistente = await prisma.aluno.findUnique({
-      where: { id: idNum }
-    });
-
-    if (!alunoExistente) {
-      return res.status(404).json({ error: 'Aluno não encontrado' });
-    }
+    const alunoExistente = await prisma.aluno.findUnique({ where: { id: idNum } });
+    if (!alunoExistente) return res.status(404).json({ error: 'Aluno não encontrado' });
 
     const alunoAtualizado = await prisma.aluno.update({
       where: { id: idNum },

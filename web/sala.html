@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style2.css">
 <title>Sala de Alunos</title>
 <style>
 html, body { height: 100%; margin: 0; padding: 0; }
@@ -11,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
     color: white;
     background-image: url('fotos/fundoForm2.png');
-    background-size: center;
+    background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
@@ -27,32 +26,50 @@ body {
 }
 .Informações { text-align: center; font-size: 28px; margin: 20px 0; text-shadow: 1px 1px 5px black; }
 #filtros { display: flex; gap: 10px; margin-bottom: 20px; }
-#filtros button { padding: 8px 15px; border: none; border-radius: 5px; background-color: #28a745; color: white; cursor: pointer; transition: 0.3s; }
-#filtros button:hover { background-color: #218838; }
+#filtros button { padding: 8px 15px; border: none; border-radius: 5px; background-color: #ff0303; color: white; cursor: pointer; transition: 0.3s; }
+#filtros button:hover { background-color: #ff4b4b; }
 #lista-sala {
     width: 90%; max-width: 800px; margin-bottom: 20px; padding: 20px;
     background-color: rgba(0,0,0,0.7); border-radius: 10px;
     display: flex; flex-direction: column; gap: 15px; min-height: 50px;
 }
-.aluno {
-    background-color: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;
-    display: flex; flex-direction: column; gap: 5px;
+.aluno, .professor {
+    background-color: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
-.aluno p { margin: 0; }
-.remover { align-self: flex-start; padding: 5px 10px; border: none; border-radius: 5px; background-color: red; color: white; cursor: pointer; }
+.aluno p, .professor p { margin: 0; }
+.remover {
+    align-self: flex-start;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
 .remover:hover { background-color: darkred; }
 #voltar-home {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #003cff;
     color: white;
     cursor: pointer;
     transition: 0.3s;
     margin-top: auto;
     margin-bottom: 20px;
 }
-#voltar-home:hover { background-color: #0056b3; }
+#voltar-home:hover { background-color: #ff0000; }
+
+#professores-lista {
+    width: 90%; max-width: 800px; margin-bottom: 20px; padding: 20px;
+    background-color: rgba(0,0,0,0.7); border-radius: 10px;
+    display: flex; flex-direction: column; gap: 15px; min-height: 50px;
+}
 @media (max-width: 600px) {
     #lista-sala { padding: 15px; }
     .Informações { font-size: 22px; }
@@ -64,60 +81,72 @@ body {
 
 <div class="conteudo">
     <h5 class="Informações">Sala de Alunos</h5>
+
     <div id="filtros">
         <button data-arte="">Todos</button>
-        <button data-arte="capoeira">Capoeira</button>
-        <button data-arte="jiu-jitsu">Jiu-Jitsu</button>
-        <button data-arte="karate">Karatê</button>
+        <button data-arte="Capoeira">Capoeira</button>
+        <button data-arte="Jiu-Jitsu">Jiu-Jitsu</button>
+        <button data-arte="Karatê">Karatê</button>
     </div>
+
     <fieldset id="lista-sala"></fieldset>
+
+    <button id="mostrar-professores" style="background-color: #ff0000; color: rgb(255, 255, 255); padding: 10px 20px; border-radius: 5px; margin-top: 20px;">Mostrar Todos os Professores</button>
+    <fieldset id="professores-lista" style="display: none;"></fieldset>
 </div>
 
-<button id="voltar-home">Voltar para tela inicial</button>
+<button id="voltar-home">Voltar para a tela inicial</button>
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
     const lista = document.getElementById("lista-sala");
     const botoes = document.querySelectorAll("#filtros button");
+    const professoresLista = document.getElementById("professores-lista");
+    const mostrarProfessoresBtn = document.getElementById("mostrar-professores");
+
     let alunos = [];
+    let professores = [];
 
     document.getElementById("voltar-home").addEventListener("click", () => {
         window.location.href = "home.html";
     });
 
-    async function carregarAlunos() {
+    async function carregarDados() {
         try {
-            const resposta = await fetch('http://localhost:3100/alunos');
-            if (!resposta.ok) throw new Error("Erro ao buscar alunos");
-            alunos = await resposta.json();
-            localStorage.setItem('alunos', JSON.stringify(alunos));
+            const [resAlunos, resProfessores] = await Promise.all([
+                fetch('http://localhost:3100/alunos'),
+                fetch('http://localhost:3100/professores')
+            ]);
+            alunos = await resAlunos.json();
+            professores = await resProfessores.json();
             atualizarLista();
         } catch (err) {
-            console.error("Erro ao carregar alunos:", err);
-            const dadosLocal = localStorage.getItem('alunos');
-            if (dadosLocal) {
-                alunos = JSON.parse(dadosLocal);
-                atualizarLista();
-            }
-        }
-    }
-
-    async function removerAluno(id) {
-        try {
-            const resposta = await fetch(`http://localhost:3100/alunos/${id}`, { method: "DELETE" });
-            if (!resposta.ok) throw new Error("Erro ao remover aluno");
-            alunos = alunos.filter(a => a.id !== id);
-            localStorage.setItem('alunos', JSON.stringify(alunos));
-            atualizarLista();
-        } catch (err) {
-            console.error(err);
-            alert("Não foi possível remover o aluno.");
+            console.error("Erro ao carregar dados:", err);
         }
     }
 
     function atualizarLista(filtro = "") {
         lista.innerHTML = "";
-        const filtrados = filtro ? alunos.filter(a => a.arteMarcial === filtro) : alunos;
+
+        // Mostra o professor da arte filtrada
+        if (filtro) {
+            const professor = professores.find(p => p.arteMarcial.toLowerCase() === filtro.toLowerCase());
+            if (professor) {
+                const profDiv = document.createElement("div");
+                profDiv.classList.add("professor");
+                profDiv.innerHTML = `
+                    <p><strong>Professor:</strong> ${professor.nome}</p>
+                    <p><strong>Arte Marcial:</strong> ${professor.arteMarcial}</p>
+                    <button class="remover">Remover Professor</button>
+                `;
+                lista.appendChild(profDiv);
+
+                // botão remover professor
+                profDiv.querySelector(".remover").addEventListener("click", () => removerProfessor(professor.id));
+            }
+        }
+
+        const filtrados = filtro ? alunos.filter(a => a.arteMarcial.toLowerCase() === filtro.toLowerCase()) : alunos;
 
         if (filtrados.length === 0) {
             const p = document.createElement("p");
@@ -130,20 +159,60 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 div.innerHTML = `
                     <p><strong>Nome:</strong> ${aluno.nome}</p>
-                    <p><strong>RA:</strong> ${aluno.RA}</p>
+                    <p><strong>RA:</strong> ${aluno.RA || "Não informado"}</p>
                     <p><strong>Email:</strong> ${aluno.email}</p>
                     <p><strong>Telefone:</strong> ${aluno.telefone}</p>
                     <p><strong>Arte Marcial:</strong> ${aluno.arteMarcial}</p>
                     <p><strong>Data de Nascimento:</strong> ${aluno.datanasc ? aluno.datanasc.split('T')[0] : ''}</p>
-                    <button class="remover">Remover</button>
+                    <button class="remover">Remover Aluno</button>
                 `;
 
+                div.querySelector(".remover").addEventListener("click", () => removerAluno(aluno.id));
                 lista.appendChild(div);
-
-                div.querySelector(".remover").addEventListener("click", () => {
-                    removerAluno(aluno.id);
-                });
             });
+        }
+    }
+
+    function mostrarTodosProfessores() {
+        professoresLista.innerHTML = "";
+        professores.forEach(professor => {
+            const div = document.createElement("div");
+            div.classList.add("professor");
+            div.innerHTML = `
+                <p><strong>Nome:</strong> ${professor.nome}</p>
+                <p><strong>Arte Marcial:</strong> ${professor.arteMarcial}</p>
+                <button class="remover">Remover Professor</button>
+            `;
+            div.querySelector(".remover").addEventListener("click", () => removerProfessor(professor.id));
+            professoresLista.appendChild(div);
+        });
+        professoresLista.style.display = 'block';
+    }
+
+    mostrarProfessoresBtn.addEventListener("click", mostrarTodosProfessores);
+
+    async function removerAluno(id) {
+        try {
+            const resposta = await fetch(`http://localhost:3100/alunos/${id}`, { method: "DELETE" });
+            if (!resposta.ok) throw new Error("Erro ao remover aluno");
+            alunos = alunos.filter(a => a.id !== id);
+            atualizarLista();
+        } catch (err) {
+            console.error(err);
+            alert("Não foi possível remover o aluno.");
+        }
+    }
+
+    async function removerProfessor(id) {
+        try {
+            const resposta = await fetch(`http://localhost:3100/professores/${id}`, { method: "DELETE" });
+            if (!resposta.ok) throw new Error("Erro ao remover professor");
+            professores = professores.filter(p => p.id !== id);
+            atualizarLista();
+            mostrarTodosProfessores();
+        } catch (err) {
+            console.error(err);
+            alert("Não foi possível remover o professor.");
         }
     }
 
@@ -154,10 +223,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    await carregarAlunos();
+    await carregarDados();
 });
 </script>
 
 </body>
 </html>
-
