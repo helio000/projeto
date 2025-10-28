@@ -120,6 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             alunos = await resAlunos.json();
             professores = await resProfessores.json();
             atualizarLista();
+            mostrarTodosProfessores(); // mostrar professores sempre embaixo
         } catch (err) {
             console.error("Erro ao carregar dados:", err);
         }
@@ -127,24 +128,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function atualizarLista(filtro = "") {
         lista.innerHTML = "";
-
-        // Mostra o professor da arte filtrada
-        if (filtro) {
-            const professor = professores.find(p => p.arteMarcial.toLowerCase() === filtro.toLowerCase());
-            if (professor) {
-                const profDiv = document.createElement("div");
-                profDiv.classList.add("professor");
-                profDiv.innerHTML = `
-                    <p><strong>Professor:</strong> ${professor.nome}</p>
-                    <p><strong>Arte Marcial:</strong> ${professor.arteMarcial}</p>
-                    <button class="remover">Remover Professor</button>
-                `;
-                lista.appendChild(profDiv);
-
-                // botão remover professor
-                profDiv.querySelector(".remover").addEventListener("click", () => removerProfessor(professor.id));
-            }
-        }
 
         const filtrados = filtro ? alunos.filter(a => a.arteMarcial.toLowerCase() === filtro.toLowerCase()) : alunos;
 
@@ -208,7 +191,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const resposta = await fetch(`http://localhost:3100/professores/${id}`, { method: "DELETE" });
             if (!resposta.ok) throw new Error("Erro ao remover professor");
             professores = professores.filter(p => p.id !== id);
-            atualizarLista();
             mostrarTodosProfessores();
         } catch (err) {
             console.error(err);
