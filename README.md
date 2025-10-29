@@ -45,9 +45,9 @@
 ### 📗 DCU do Projeto (Project DCU)
 
 <img src="api/imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
-=======
+
 <img src="api/fotos/DCU.jpeg" alt="Diagrama DCU" width="600"/>
->>>>>>> 1ab661a04f5894a3090e2d50396dbd881de7dd88
+
 
 ---
 
