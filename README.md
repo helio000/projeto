@@ -36,8 +36,8 @@
 
 
 <img src="api/imagem/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
-=======
-<img src="api/fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+
+
 
 
 ---
