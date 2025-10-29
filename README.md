@@ -46,7 +46,7 @@
 
 <img src="api/imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
 
-<img src="api/fotos/DCU.jpeg" alt="Diagrama DCU" width="600"/>
+
 
 
 ---
@@ -62,7 +62,7 @@
 
 <img src="api/imagem/atividade.jpeg" alt="Canva" width="600"/>
 
-<img src="api/fotos/atividade.jpeg" alt="Canva" width="600"/>
+
 
 
 ---
