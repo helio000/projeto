@@ -1,3 +1,144 @@
+# 🥋 Artes Marciais (Martial Arts)
+
+* **Metodologia:** Kanban  
+* **Tema inicial:** Hangetsu Uzumaki – Artes Marciais (Hangetsu Uzumaki – Martial Arts)
+
+---
+
+## 👥 Equipe (Team)
+
+| Recursos        | Papéis e Responsabilidades        |
+| --------------- | --------------------------------- |
+| **Hélio**       | Back-End / Teste / Banco de Dados |
+| **João Santos** | Front-End / Banco de Dados        |
+| **Rhayssa**     | Front-End / Banco de Dados        |
+
+| Resources       | Roles and Responsibilities |
+| --------------- | -------------------------- |
+| **Hélio**       | Back-End / Test / Database |
+| **João Santos** | Front-End / Database       |
+| **Rhayssa**     | Front-End / Database       |
+
+---
+
+## 📂 Repositórios do Projeto (Project Repositories)
+
+* 🌐 [Front-End (Web)](https://github.com/helio000/web-projeto2)
+* ⚙️ [Back-End (API)](https://github.com/helio000/back-projeto-2025)
+* 📱 [Mobile (App)](https://github.com/helio000/mobile-artes-marciais)
+
+---
+
+## 🧩 Diagramas do Projeto (Project Diagrams)
+
+### 📘 Diagrama de Classes (Back-End)
+
+![Diagrama de Classes](https://raw.githubusercontent.com/helio000/mobile-artes-marciais/main/api/imagem/UML%20DC%20(Diagrama%20de%20Classes)%20Back-End.png)
+
+---
+
+### 📗 DCU do Projeto (Project DCU)
+
+![Diagrama DCU](https://raw.githubusercontent.com/helio000/mobile-artes-marciais/main/api/imagem/DCU.jpeg)
+
+---
+
+### 📙 Diagrama Geral do Projeto (Project Diagram)
+
+![Diagrama Geral](https://raw.githubusercontent.com/helio000/mobile-artes-marciais/main/api/imagem/diagrama%20do%20projeto.jpeg)
+
+---
+
+### 💀 Canva (Canvas)
+
+![Canva](https://raw.githubusercontent.com/helio000/mobile-artes-marciais/main/api/imagem/atividade.jpeg)
+
+---
+
+### 👽 Triângulo de Ferro (Iron Triangle)
+
+![Triângulo de Ferro](https://raw.githubusercontent.com/helio000/mobile-artes-marciais/main/api/imagem/atividade%202.jpeg)
+
+---
+
+### 🫡 SWOT (SWOT)
+
+![SWOT](https://raw.githubusercontent.com/helio000/mobile-artes-marciais/main/api/imagem/atividade%203.jpeg)
+
+---
+
+## ✅ Checklist de Testes – Projeto (Test Checklist – Project)
+
+### ⚙️ Testes Gerais (General Tests)
+
+* [x] Verificar se o endpoint `/` retorna **200** e informações da API.  
+  (Check if `/` endpoint returns 200 and API info)
+
+---
+
+### 🧑‍🎓 Testes de Alunos (Student Tests)
+
+* [x] Criar aluno (POST /alunos) → verificar campos obrigatórios e email único.
+* [x] Listar todos alunos (GET /alunos) → deve retornar lista completa.
+* [x] Obter aluno por ID (GET /alunos/:id) → 200 se existir, 404 se não existir.
+* [ ] Atualizar aluno (PUT/PATCH /alunos/:id) → alterar campos opcionais, mantendo email único.
+* [x] Remover aluno (DELETE /alunos/:id) → 200 ou 204.
+* [x] Login do aluno (POST /alunos/login) → credenciais válidas retornam token.
+* [x] Validar token (GET /alunos/login) → 200 com token válido, 401 com inválido/expirado.
+
+---
+
+### 🥋 Testes de Professores (Teacher Tests)
+
+* [x] Criar professor (POST /professores) → verificar campos obrigatórios e email único.
+* [x] Listar todos professores (GET /professores).
+* [x] Obter professor por ID (GET /professores/:id).
+* [x] Atualizar professor (PUT/PATCH /professores/:id).
+* [x] Remover professor (DELETE /professores/:id).
+
+---
+
+### 🏫 Testes de Turmas (Class Tests)
+
+* [x] Criar turma (POST /turmas).
+* [x] Listar todas turmas (GET /turmas).
+* [x] Obter turma por ID (GET /turmas/:id).
+* [x] Atualizar turma (PUT/PATCH /turmas/:id).
+* [x] Remover turma (DELETE /turmas/:id).
+
+---
+
+### 🧾 Testes de Matrículas (Enrollment Tests)
+
+* [x] Criar matrícula (POST /matriculas).
+* [x] Listar todas matrículas (GET /matriculas).
+* [x] Obter matrícula por ID (GET /matriculas/:id).
+* [x] Atualizar matrícula (PUT/PATCH /matriculas/:id).
+* [x] Remover matrícula (DELETE /matriculas/:id).
+
+---
+
+## 🧭 Passo a Passo para Testar (How to Test)
+
+1. Clone este repositório
+2. Abra o projeto no **VS Code**
+3. Inicie o **MySQL** pelo **XAMPP** (ou outro método de sua preferência)
+4. Crie o arquivo `.env` dentro da pasta `api/` com o conteúdo:
+
+```env
+DATABASE_URL="mysql://root@localhost:3306/escola?schema=public&timezone=UTC"
+
+
+Rode o servidor com:
+
+
+npm run dev
+
+
+
+Teste os endpoints no Insomnia ou Postman 🚀
+
+
 
 ### Explicação das mudanças:
 
@@ -22,3 +163,5 @@
 git add README.md
 git commit -m "Atualiza o README com imagens e instruções"
 git push origin main  # ou o nome do seu branch
+
+Com essas modificações, seu README.md deve ficar bem mais funcional e as imagens devem aparecer corretamente no GitHub. Se tiver mais alguma dúvida ou precisar de mais ajuda, é só chamar!
