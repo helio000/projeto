@@ -34,13 +34,20 @@
 
 ### 📘 Diagrama de Classes (Back-End)
 
+
+<img src="api/imagem/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+=======
 <img src="api/fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+
 
 ---
 
 ### 📗 DCU do Projeto (Project DCU)
 
+<img src="api/imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
+=======
 <img src="api/fotos/DCU.jpeg" alt="Diagrama DCU" width="600"/>
+>>>>>>> 1ab661a04f5894a3090e2d50396dbd881de7dd88
 
 ---
 
@@ -52,7 +59,11 @@
 
 ### 💀 Canva (Canvas)
 
+
+<img src="api/imagem/atividade.jpeg" alt="Canva" width="600"/>
+
 <img src="api/fotos/atividade.jpeg" alt="Canva" width="600"/>
+
 
 ---
 
@@ -138,19 +149,19 @@
 
 ### 📘 Diagrama de Classes (Back-End)
 
-<img src="api/fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+<img src="api/imagem/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
 
 ---
 
 ### 📗 DCU do Projeto (Project DCU)
 
-<img src="api/fotos/DCU do projeto.jpeg" alt="Diagrama DCU" width="600"/>
+<img src="api/imagem/DCU do projeto.jpeg" alt="Diagrama DCU" width="600"/>
 
 ---
 
 ### 📙 Diagrama Geral do Projeto (Project Diagram)
 
-<img src="api/fotos/diagrama do projeto.jpeg" alt="Diagrama geral" width="600"/>
+<img src="api/imagem/diagrama do projeto.jpeg" alt="Diagrama geral" width="600"/>
 
 ---
 
