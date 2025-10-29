@@ -34,13 +34,13 @@
 
 ### 📘 Diagrama de Classes (Back-End)
 
-<img src="api/imagem/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
+<img src="api/fotos/UML DC (Diagrama de Classes) Back-End.png" alt="UML DC Backend" width="350"/>
 
 ---
 
 ### 📗 DCU do Projeto (Project DCU)
 
-<img src="api/imagem/DCU.jpeg" alt="Diagrama DCU" width="600"/>
+<img src="api/fotos/DCU.jpeg" alt="Diagrama DCU" width="600"/>
 
 ---
 
@@ -52,7 +52,7 @@
 
 ### 💀 Canva (Canvas)
 
-<img src="api/imagem/atividade.jpeg" alt="Canva" width="600"/>
+<img src="api/fotos/atividade.jpeg" alt="Canva" width="600"/>
 
 ---
 
