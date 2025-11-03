@@ -121,29 +121,6 @@
 
 ---
 
-## 🧭 Passo a Passo para Testar (How to Test)
-
-1. Clone este repositório
-2. Abra o projeto no **VS Code**
-3. Inicie o **MySQL** pelo **XAMPP** (ou outro método de sua preferência)
-4. Crie o arquivo `.env` dentro da pasta `api/` com o conteúdo:
-
-
-
-* 🌐 [Front-End (Web)](https://github.com/helio000/web-projeto2)
-* ⚙️ [Back-End (API)](https://github.com/helio000/back-projeto-2025)
-* 📱 [Mobile (App)](https://github.com/helio000/mobile-artes-marciais)
-
----
-
-## ✅ Checklist de Testes – Projeto (Test Checklist – Project)
-
-### ⚙️ Testes Gerais (General Tests)
-
-* [x] Verificar se o endpoint `/` retorna **200** e informações da API.
-  (Check if `/` endpoint returns 200 and API info)
-
----
 
 ### 🧑‍🎓 Testes de Alunos (Student Tests)
 
