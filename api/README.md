@@ -5,7 +5,7 @@ A API utiliza Express para o servidor, Prisma para interação com o banco de da
 
 # ⚙️ Configuração e Instalação
 # 1. Clone o repositório
-git clone https://github.com/helio000/projeto-2025.git
+git clone https://github.com/helio000/projeto/tree/main
 
 # 2. Acesse a pasta da API
 cd api
