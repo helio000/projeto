@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     planejamentos.forEach(p => {
       const tr = document.createElement("tr");
+
       tr.innerHTML = `
         <td>${p.diaSemana}</td>
         <td>${p.atividade}</td>
@@ -195,7 +196,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       tabela.appendChild(tr);
     });
 
-    // editar
+    // Permitir editar apenas se for o professor dono
     document.querySelectorAll(".editar").forEach(btn => {
       btn.addEventListener("click", async () => {
         const id = btn.dataset.id;
@@ -206,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           return;
         }
 
-        const novo = prompt("Nova descrição da atividade:");
+        const novo = prompt("Nova descrição da atividade:", btn.parentElement.previousElementSibling.textContent);
         if (!novo) return;
 
         await fetch(`http://localhost:3100/planejamentos/${id}`, {
@@ -220,7 +221,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // excluir
+    // Permitir excluir apenas se for o professor dono
     document.querySelectorAll(".excluir").forEach(btn => {
       btn.addEventListener("click", async () => {
         const id = btn.dataset.id;
@@ -240,7 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // adicionar
+  // Adicionar nova atividade
   salvarBtn.addEventListener("click", async () => {
     const diaSemana = document.getElementById("diaSemana").value;
     const atividade = document.getElementById("atividade").value;
