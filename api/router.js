@@ -7,9 +7,13 @@ const Telefone = require('./src/controllers/telefone');
 const Turma = require('./src/controllers/turma');
 const Matricula = require('./src/controllers/matricula');
 
+// 🔑 CORREÇÃO AQUI: Importação do Controller de Planejamento
+const Planejamento = require('./src/controllers/Planejamento'); // 👈 Linha corrigida
+const AulaSemana = require('./src/controllers/aulaSemana'); 
+
 // Rota inicial
 routes.get('/', (req, res) => {
-  return res.json({ titulo: 'PROJETO - Membros: Coronel, Cati e Rhay' });
+  return res.json({ titulo: 'PROJETO - Membros: Coronel, Cati e Rhay' });
 });
 
 // Rotas de Aluno
@@ -23,7 +27,7 @@ routes.delete('/alunos/:id', Aluno.remove);
 // Login do Aluno
 routes.post('/alunos/login', Aluno.login);
 
-// Rota para atualizar apenas as notas do aluno
+// Atualizar notas do aluno
 routes.put('/alunos/:id/notas', Aluno.updateNotas);
 
 // Rotas de Professor
@@ -57,5 +61,18 @@ routes.get('/matriculas/:id', Matricula.readOne);
 routes.put('/matriculas/:id', Matricula.update);
 routes.patch('/matriculas/:id', Matricula.update);
 routes.delete('/matriculas/:id', Matricula.remove);
+
+// Rotas de Planejamento (Aulas da semana) - AGORA USAM O CONTROLLER IMPORTADO
+routes.post('/planejamentos', Planejamento.create);
+routes.get('/planejamentos', Planejamento.read);
+routes.put('/planejamentos/:id', Planejamento.update);
+routes.delete('/planejamentos/:id', Planejamento.remove);
+
+// 🔹 Rotas para Aulas da Semana
+routes.post('/aulas-semana', AulaSemana.create);       // cria a aula da semana
+routes.get('/aulas-semana', AulaSemana.read);          // lista todas
+routes.get('/aulas-semana/:id', AulaSemana.readOne);   // mostra uma específica
+routes.put('/aulas-semana/:id', AulaSemana.update);    // professor altera a aula
+routes.delete('/aulas-semana/:id', AulaSemana.remove); // remove uma aula da semana
 
 module.exports = routes;

@@ -12,6 +12,13 @@ const {
   loginProfessor
 } = require('./src/controllers/professor.js');
 
+const {
+  read: readPlanejamento,
+  create: createPlanejamento,
+  update: updatePlanejamento,
+  remove: removePlanejamento
+} = require('./src/controllers/planejamento.js');
+
 const app = express();
 const port = process.env.PORT || 3100;
 
@@ -41,6 +48,12 @@ app.delete('/professores/:id', removeProfessor);
 
 // Login Professores
 app.post('/professores/login', loginProfessor);
+
+// ✅ Rotas Planejamento
+app.get('/planejamentos', readPlanejamento);
+app.post('/planejamentos', createPlanejamento);
+app.put('/planejamentos/:id', updatePlanejamento);
+app.delete('/planejamentos/:id', removePlanejamento);
 
 // Rota inicial
 app.get('/', (req, res) => {

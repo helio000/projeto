@@ -39,8 +39,13 @@
             transform: scale(1.05);
         }
         #filtros button.ativo {
+
+            background-color: #ff0707;
+            color: rgb(255, 255, 255);
+
             background-color: #ffc107;
             color: black;
+
             transform: scale(1.05);
         }
         .professor, .aluno {
@@ -64,6 +69,23 @@
             margin-right: 5px;
         }
         .notas-btn:hover { background-color: #0056b3; }
+
+        #voltar-home, #abrir-planejamento {
+            margin-top: 1rem;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        #voltar-home {
+            background-color: red;
+        }
+        #abrir-planejamento {
+            background-color: #ff8c00;
+
         #voltar-home {
             margin-top: auto;
             margin-bottom: 20px;
@@ -72,8 +94,10 @@
             border: none;
             background-color: red;
             cursor: pointer;
+
         }
         #voltar-home:hover { background-color: darkred; }
+        #abrir-planejamento:hover { background-color: #e07b00; }
 
         .notas-container {
             display: flex;
@@ -95,6 +119,10 @@
 
 <h2>Sala de Professores</h2>
 <div id="info-professor"></div>
+
+<!-- Botão para abrir a página de planejamento -->
+<button id="abrir-planejamento">📅 Ver Planejamento de Aulas</button>
+
 <div id="filtros">
     <button data-arte="">Todos</button>
     <button data-arte="capoeira">Capoeira</button>
@@ -111,8 +139,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const infoProfessor = document.getElementById("info-professor");
     const botoes = document.querySelectorAll("#filtros button");
 
+    // Botão para voltar
     document.getElementById("voltar-home").addEventListener("click", () => {
         window.location.href = "home.html";
+    });
+
+    // Botão para acessar o planejamento
+    document.getElementById("abrir-planejamento").addEventListener("click", () => {
+        window.location.href = "planejamento.html";
     });
 
     let professorLogado = JSON.parse(localStorage.getItem("professorLogado"));
@@ -124,7 +158,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Mostra info do professor logado
     infoProfessor.innerHTML = `
         <div class="professor">
             <h3>Bem-vindo, Prof. ${professorLogado.nome}</h3>
@@ -132,18 +165,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
     `;
 
-    // Busca alunos
     async function carregarAlunos() {
         try {
             const res = await fetch('http://localhost:3100/alunos');
             alunos = await res.json();
-            atualizarLista(professorLogado.arteMarcial); // filtra por arte do professor
+            atualizarLista(professorLogado.arteMarcial);
         } catch (err) {
             console.error("Erro ao carregar alunos:", err);
         }
     }
 
+
+
     // Normaliza texto para comparação (sem acento e tudo minúsculo)
+
     function normalizarTexto(txt) {
         return txt
             ? txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")

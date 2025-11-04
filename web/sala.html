@@ -28,12 +28,15 @@ body {
 #filtros { display: flex; gap: 10px; margin-bottom: 20px; }
 #filtros button { padding: 8px 15px; border: none; border-radius: 5px; background-color: #ff0303; color: white; cursor: pointer; transition: 0.3s; }
 #filtros button:hover { background-color: #ff4b4b; }
-#lista-sala {
+
+fieldset {
     width: 90%; max-width: 800px; margin-bottom: 20px; padding: 20px;
     background-color: rgba(0,0,0,0.7); border-radius: 10px;
-    display: flex; flex-direction: column; gap: 15px; min-height: 50px;
+    display: flex; flex-direction: column; gap: 15px;
+    min-height: 50px;
 }
-.aluno, .professor {
+
+.aluno, .professor, .aula {
     background-color: rgba(255,255,255,0.1);
     padding: 10px;
     border-radius: 8px;
@@ -41,7 +44,8 @@ body {
     flex-direction: column;
     gap: 5px;
 }
-.aluno p, .professor p { margin: 0; }
+.aluno p, .professor p, .aula p { margin: 0; }
+
 .remover {
     align-self: flex-start;
     padding: 5px 10px;
@@ -52,6 +56,7 @@ body {
     cursor: pointer;
 }
 .remover:hover { background-color: darkred; }
+
 #voltar-home {
     padding: 10px 20px;
     border: none;
@@ -70,8 +75,9 @@ body {
     background-color: rgba(0,0,0,0.7); border-radius: 10px;
     display: flex; flex-direction: column; gap: 15px; min-height: 50px;
 }
+
 @media (max-width: 600px) {
-    #lista-sala { padding: 15px; }
+    #lista-sala, #lista-aulas { padding: 15px; }
     .Informações { font-size: 22px; }
     #filtros { flex-direction: column; gap: 5px; }
 }
@@ -91,6 +97,10 @@ body {
 
     <fieldset id="lista-sala"></fieldset>
 
+    <fieldset id="lista-aulas">
+        <legend>Aulas da Semana</legend>
+    </fieldset>
+
     <button id="mostrar-professores" style="background-color: #ff0000; color: rgb(255, 255, 255); padding: 10px 20px; border-radius: 5px; margin-top: 20px;">Mostrar Todos os Professores</button>
     <fieldset id="professores-lista" style="display: none;"></fieldset>
 </div>
@@ -99,13 +109,15 @@ body {
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-    const lista = document.getElementById("lista-sala");
+    const listaAlunos = document.getElementById("lista-sala");
+    const listaAulas = document.getElementById("lista-aulas");
     const botoes = document.querySelectorAll("#filtros button");
     const professoresLista = document.getElementById("professores-lista");
     const mostrarProfessoresBtn = document.getElementById("mostrar-professores");
 
     let alunos = [];
     let professores = [];
+    let aulas = [];
 
     document.getElementById("voltar-home").addEventListener("click", () => {
         window.location.href = "home.html";
@@ -113,33 +125,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function carregarDados() {
         try {
-            const [resAlunos, resProfessores] = await Promise.all([
+            const [resAlunos, resProfessores, resAulas] = await Promise.all([
                 fetch('http://localhost:3100/alunos'),
-                fetch('http://localhost:3100/professores')
+                fetch('http://localhost:3100/professores'),
+                fetch('http://localhost:3100/planejamentos')
             ]);
             alunos = await resAlunos.json();
             professores = await resProfessores.json();
+            aulas = await resAulas.json();
+
             atualizarLista();
-            mostrarTodosProfessores(); // mostrar professores sempre embaixo
+            atualizarAulas();
+            mostrarTodosProfessores(); // sempre mostrar professores
         } catch (err) {
             console.error("Erro ao carregar dados:", err);
         }
     }
 
     function atualizarLista(filtro = "") {
-        lista.innerHTML = "";
+        listaAlunos.innerHTML = "";
 
         const filtrados = filtro ? alunos.filter(a => a.arteMarcial.toLowerCase() === filtro.toLowerCase()) : alunos;
 
         if (filtrados.length === 0) {
             const p = document.createElement("p");
             p.textContent = "Nenhum aluno cadastrado.";
-            lista.appendChild(p);
+            listaAlunos.appendChild(p);
         } else {
             filtrados.forEach(aluno => {
                 const div = document.createElement("div");
                 div.classList.add("aluno");
-
                 div.innerHTML = `
                     <p><strong>Nome:</strong> ${aluno.nome}</p>
                     <p><strong>RA:</strong> ${aluno.RA || "Não informado"}</p>
@@ -149,11 +164,32 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <p><strong>Data de Nascimento:</strong> ${aluno.datanasc ? aluno.datanasc.split('T')[0] : ''}</p>
                     <button class="remover">Remover Aluno</button>
                 `;
-
                 div.querySelector(".remover").addEventListener("click", () => removerAluno(aluno.id));
-                lista.appendChild(div);
+                listaAlunos.appendChild(div);
             });
         }
+    }
+
+    function atualizarAulas(filtro = "") {
+        listaAulas.innerHTML = "<legend>Aulas da Semana</legend>";
+
+        const filtradas = filtro ? aulas.filter(a => a.professor?.arteMarcial?.toLowerCase() === filtro.toLowerCase()) : aulas;
+
+        if (filtradas.length === 0) {
+            listaAulas.innerHTML += "<p>Nenhuma aula cadastrada.</p>";
+            return;
+        }
+
+        filtradas.forEach(aula => {
+            const div = document.createElement("div");
+            div.classList.add("aula");
+            div.innerHTML = `
+                <p><strong>Dia:</strong> ${aula.diaSemana}</p>
+                <p><strong>Atividade:</strong> ${aula.atividade}</p>
+                <p><strong>Professor:</strong> ${aula.professor?.nome || "—"}</p>
+            `;
+            listaAulas.appendChild(div);
+        });
     }
 
     function mostrarTodosProfessores() {
@@ -171,8 +207,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         professoresLista.style.display = 'block';
     }
-
-    mostrarProfessoresBtn.addEventListener("click", mostrarTodosProfessores);
 
     async function removerAluno(id) {
         try {
@@ -202,8 +236,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         btn.addEventListener("click", () => {
             const arte = btn.getAttribute("data-arte");
             atualizarLista(arte);
+            atualizarAulas(arte);
         });
     });
+
+    mostrarProfessoresBtn.addEventListener("click", mostrarTodosProfessores);
 
     await carregarDados();
 });
