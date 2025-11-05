@@ -25,7 +25,7 @@ body {
     width: 100%;
 }
 .Informações { text-align: center; font-size: 28px; margin: 20px 0; text-shadow: 1px 1px 5px black; }
-#filtros { display: flex; gap: 10px; margin-bottom: 20px; }
+#filtros { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
 #filtros button { padding: 8px 15px; border: none; border-radius: 5px; background-color: #ff0303; color: white; cursor: pointer; transition: 0.3s; }
 #filtros button:hover { background-color: #ff4b4b; }
 
@@ -36,7 +36,7 @@ fieldset {
     min-height: 50px;
 }
 
-.aluno, .professor, .aula {
+.aluno, .aula {
     background-color: rgba(255,255,255,0.1);
     padding: 10px;
     border-radius: 8px;
@@ -44,7 +44,7 @@ fieldset {
     flex-direction: column;
     gap: 5px;
 }
-.aluno p, .professor p, .aula p { margin: 0; }
+.aluno p, .aula p { margin: 0; }
 
 .remover {
     align-self: flex-start;
@@ -70,14 +70,8 @@ fieldset {
 }
 #voltar-home:hover { background-color: #ff0000; }
 
-#professores-lista {
-    width: 90%; max-width: 800px; margin-bottom: 20px; padding: 20px;
-    background-color: rgba(0,0,0,0.7); border-radius: 10px;
-    display: flex; flex-direction: column; gap: 15px; min-height: 50px;
-}
-
 @media (max-width: 600px) {
-    #lista-sala, #lista-aulas { padding: 15px; }
+    fieldset { padding: 15px; }
     .Informações { font-size: 22px; }
     #filtros { flex-direction: column; gap: 5px; }
 }
@@ -100,9 +94,6 @@ fieldset {
     <fieldset id="lista-aulas">
         <legend>Aulas da Semana</legend>
     </fieldset>
-
-    <button id="mostrar-professores" style="background-color: #ff0000; color: rgb(255, 255, 255); padding: 10px 20px; border-radius: 5px; margin-top: 20px;">Mostrar Todos os Professores</button>
-    <fieldset id="professores-lista" style="display: none;"></fieldset>
 </div>
 
 <button id="voltar-home">Voltar para a tela inicial</button>
@@ -112,11 +103,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const listaAlunos = document.getElementById("lista-sala");
     const listaAulas = document.getElementById("lista-aulas");
     const botoes = document.querySelectorAll("#filtros button");
-    const professoresLista = document.getElementById("professores-lista");
-    const mostrarProfessoresBtn = document.getElementById("mostrar-professores");
 
     let alunos = [];
-    let professores = [];
     let aulas = [];
 
     document.getElementById("voltar-home").addEventListener("click", () => {
@@ -125,18 +113,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function carregarDados() {
         try {
-            const [resAlunos, resProfessores, resAulas] = await Promise.all([
+            const [resAlunos, resAulas] = await Promise.all([
                 fetch('http://localhost:3100/alunos'),
-                fetch('http://localhost:3100/professores'),
                 fetch('http://localhost:3100/planejamentos')
             ]);
             alunos = await resAlunos.json();
-            professores = await resProfessores.json();
             aulas = await resAulas.json();
 
             atualizarLista();
             atualizarAulas();
-            mostrarTodosProfessores(); // sempre mostrar professores
         } catch (err) {
             console.error("Erro ao carregar dados:", err);
         }
@@ -148,26 +133,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         const filtrados = filtro ? alunos.filter(a => a.arteMarcial.toLowerCase() === filtro.toLowerCase()) : alunos;
 
         if (filtrados.length === 0) {
-            const p = document.createElement("p");
-            p.textContent = "Nenhum aluno cadastrado.";
-            listaAlunos.appendChild(p);
-        } else {
-            filtrados.forEach(aluno => {
-                const div = document.createElement("div");
-                div.classList.add("aluno");
-                div.innerHTML = `
-                    <p><strong>Nome:</strong> ${aluno.nome}</p>
-                    <p><strong>RA:</strong> ${aluno.RA || "Não informado"}</p>
-                    <p><strong>Email:</strong> ${aluno.email}</p>
-                    <p><strong>Telefone:</strong> ${aluno.telefone}</p>
-                    <p><strong>Arte Marcial:</strong> ${aluno.arteMarcial}</p>
-                    <p><strong>Data de Nascimento:</strong> ${aluno.datanasc ? aluno.datanasc.split('T')[0] : ''}</p>
-                    <button class="remover">Remover Aluno</button>
-                `;
-                div.querySelector(".remover").addEventListener("click", () => removerAluno(aluno.id));
-                listaAlunos.appendChild(div);
-            });
+            listaAlunos.innerHTML = "<p>Nenhum aluno cadastrado.</p>";
+            return;
         }
+
+        filtrados.forEach(aluno => {
+            const div = document.createElement("div");
+            div.classList.add("aluno");
+            div.innerHTML = `
+                <p><strong>Nome:</strong> ${aluno.nome}</p>
+                <p><strong>RA:</strong> ${aluno.RA || "Não informado"}</p>
+                <p><strong>Email:</strong> ${aluno.email}</p>
+                <p><strong>Telefone:</strong> ${aluno.telefone}</p>
+                <p><strong>Arte Marcial:</strong> ${aluno.arteMarcial}</p>
+                <p><strong>Data de Nascimento:</strong> ${aluno.datanasc ? aluno.datanasc.split('T')[0] : ''}</p>
+                <button class="remover">Remover Aluno</button>
+            `;
+            div.querySelector(".remover").addEventListener("click", () => removerAluno(aluno.id));
+            listaAlunos.appendChild(div);
+        });
     }
 
     function atualizarAulas(filtro = "") {
@@ -192,22 +176,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    function mostrarTodosProfessores() {
-        professoresLista.innerHTML = "";
-        professores.forEach(professor => {
-            const div = document.createElement("div");
-            div.classList.add("professor");
-            div.innerHTML = `
-                <p><strong>Nome:</strong> ${professor.nome}</p>
-                <p><strong>Arte Marcial:</strong> ${professor.arteMarcial}</p>
-                <button class="remover">Remover Professor</button>
-            `;
-            div.querySelector(".remover").addEventListener("click", () => removerProfessor(professor.id));
-            professoresLista.appendChild(div);
-        });
-        professoresLista.style.display = 'block';
-    }
-
     async function removerAluno(id) {
         try {
             const resposta = await fetch(`http://localhost:3100/alunos/${id}`, { method: "DELETE" });
@@ -220,18 +188,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    async function removerProfessor(id) {
-        try {
-            const resposta = await fetch(`http://localhost:3100/professores/${id}`, { method: "DELETE" });
-            if (!resposta.ok) throw new Error("Erro ao remover professor");
-            professores = professores.filter(p => p.id !== id);
-            mostrarTodosProfessores();
-        } catch (err) {
-            console.error(err);
-            alert("Não foi possível remover o professor.");
-        }
-    }
-
     botoes.forEach(btn => {
         btn.addEventListener("click", () => {
             const arte = btn.getAttribute("data-arte");
@@ -239,8 +195,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             atualizarAulas(arte);
         });
     });
-
-    mostrarProfessoresBtn.addEventListener("click", mostrarTodosProfessores);
 
     await carregarDados();
 });
