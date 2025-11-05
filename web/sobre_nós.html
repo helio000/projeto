@@ -5,41 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style2.css">
     <title>Informações - Hangetsu Uzumaki</title>
+    <style>
+        body {
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        fieldset {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            border: none;
+            color: white;
+        }
+
+        .aulas-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .aula {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            width: 230px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .aula:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .aula h3 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .criadores {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .criadores h3 {
+            color: #00bfff;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ffcc00;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ffaa00;
+        }
+    </style>
 </head>
 <body background="fundoInfo.png">
 
     <h5 class="Informações">Informações</h5>
 
     <center>
-        <fieldset style="width: 80%; max-width: 600px; padding: 20px;">
-            <h3>Capoeira</h3>
-            <p>Idade mínima: 6 anos</p>
-            <p>Horário: 16:00 às 17:00</p>
-            <p>Mensalidade: R$140,00</p>
+        <fieldset style="width: 80%; max-width: 900px; padding: 20px;">
+            
+            <div class="aulas-container">
+                <div class="aula">
+                    <h3>Capoeira</h3>
+                    <p><b>Dias:</b> Segunda a Sexta-feira</p>
+                    <p><b>Crianças:</b> 08:00 às 09:00</p>
+                    <p><b>Jovens:</b> 14:00 às 15:00</p>
+                    <p><b>Adultos:</b> 19:00 às 20:00</p>
+                    <p><b>Mensalidade:</b> R$140,00</p>
+                </div>
 
-            <h3>Karatê</h3>
-            <p>Idade mínima: 6 anos</p>
-            <p>Horário: 17:30 às 18:30</p>
-            <p>Mensalidade: R$140,00</p>
+                <div class="aula">
+                    <h3>Karatê</h3>
+                    <p><b>Dias:</b> Segunda a Sexta-feira</p>
+                    <p><b>Crianças:</b> 09:30 às 10:30</p>
+                    <p><b>Jovens:</b> 15:30 às 16:30</p>
+                    <p><b>Adultos:</b> 20:00 às 21:00</p>
+                    <p><b>Mensalidade:</b> R$140,00</p>
+                </div>
 
-            <h3>Jiu-Jitsu</h3>
-            <p>Idade mínima: 6 anos</p>
-            <p>Horário: 19:00 às 20:00</p>
-            <p>Mensalidade: R$140,00</p>
+                <div class="aula">
+                    <h3>Jiu-Jitsu</h3>
+                    <p><b>Dias:</b> Segunda a Sexta-feira</p>
+                    <p><b>Crianças:</b> 10:30 às 11:30</p>
+                    <p><b>Jovens:</b> 16:30 às 17:30</p>
+                    <p><b>Adultos:</b> 21:00 às 22:00</p>
+                    <p><b>Mensalidade:</b> R$140,00</p>
+                </div>
+            </div>
 
             <br><br>
 
             <!-- Botões logo abaixo das modalidades -->
             <a href="home.html">
-                <button onclick="Cadastrar()" class="voltar">
-                    <font color="black"><b>Voltar</b></font>
-                </button>
+                <button class="voltar"><b>Voltar</b></button>
             </a>
             <a href="Cadastro_Aula_Capoeira.html">
-                <button onclick="Cadastrar()" class="cadastre-se">
-                    <font color="black"><b>Cadastre-se</b></font>
-                </button>
+                <button class="cadastre-se"><b>Cadastre-se</b></button>
             </a>
+
+            <div class="criadores">
+                <hr style="width: 80%; border: 1px solid white;">
+                <h3>Desenvolvido por:</h3>
+                <p><b>Hélio Alves de Oliveira</b></p>
+                <p><b>Rhayssa</b></p>
+                <p><b>João</b></p>
+                <p>Com dedicação e trabalho em equipe 💪</p>
+            </div>
 
         </fieldset>
     </center>
