@@ -127,10 +127,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // 🔠 Função para normalizar texto (remove acentos)
+    function normalizar(texto) {
+        return texto ? texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
+    }
+
     function atualizarLista(filtro = "") {
         listaAlunos.innerHTML = "";
 
-        const filtrados = filtro ? alunos.filter(a => a.arteMarcial.toLowerCase() === filtro.toLowerCase()) : alunos;
+        const filtrados = filtro
+            ? alunos.filter(a => normalizar(a.arteMarcial) === normalizar(filtro))
+            : alunos;
 
         if (filtrados.length === 0) {
             listaAlunos.innerHTML = "<p>Nenhum aluno cadastrado.</p>";
@@ -157,7 +164,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     function atualizarAulas(filtro = "") {
         listaAulas.innerHTML = "<legend>Aulas da Semana</legend>";
 
-        const filtradas = filtro ? aulas.filter(a => a.professor?.arteMarcial?.toLowerCase() === filtro.toLowerCase()) : aulas;
+        const filtradas = filtro
+            ? aulas.filter(a => normalizar(a.professor?.arteMarcial) === normalizar(filtro))
+            : aulas;
 
         if (filtradas.length === 0) {
             listaAulas.innerHTML += "<p>Nenhuma aula cadastrada.</p>";
