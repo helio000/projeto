@@ -28,7 +28,7 @@
 | 🥊 **João Santos** | [github.com/joaosantos](https://github.com/JoaopedroNCPS) |
 | 🧘 **Rhayssa** | [github.com/rhayssa](https://github.com/Rhay1102) |
 
-> 🔗 Também disponível no repositório do grupo: [Hangetsu Uzumaki – Artes Marciais](https://github.com/helio000)
+>
 
 
 
