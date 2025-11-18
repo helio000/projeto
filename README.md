@@ -28,10 +28,6 @@
 | 🥊 **João Santos** | [github.com/joaosantos](https://github.com/JoaopedroNCPS) |
 | 🧘 **Rhayssa** | [github.com/rhayssa](https://github.com/Rhay1102) |
 
->
-
-
-
 
 ## 📂 Repositórios do Projeto (Project Repositories)
 
