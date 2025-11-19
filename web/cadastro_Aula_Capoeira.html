@@ -11,7 +11,6 @@
   <form id="formulario" class="box-form">
     <div class="form">
       
-      <!-- Título Cadastro em cima do formulário -->
       <h2 class="Cadastro">Cadastro</h2>
 
       <div class="input-group">
@@ -34,15 +33,20 @@
         <input type="tel" id="telefone" placeholder="Telefone" required />
       </div>
 
- <div class="input-group">
-  <label for="arte-marcial">Arte Marcial</label>
-  <select id="arte-marcial" required>
-    <option value="">Selecione uma opção</option>
-    <option value="capoeira">Capoeira</option>
-    <option value="jiu-jitsu">Jiu-Jitsu</option>
-    <option value="karatê">Karatê</option>
-  </select>
-</div>
+      <div class="input-group">
+        <label for="arte-marcial">Arte Marcial</label>
+        <select id="arte-marcial" required>
+          <option value="">Selecione uma opção</option>
+          <option value="capoeira">Capoeira</option>
+          <option value="jiu-jitsu">Jiu-Jitsu</option>
+          <option value="karatê">Karatê</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="ra">RA</label>
+        <input type="text" id="ra" placeholder="Digite seu RA" required />
+      </div>
 
       <div class="input-group">
         <button type="submit" class="enviar-button">Enviar</button>
@@ -66,16 +70,17 @@
           datanasc: document.getElementById("datanasc").value,
           email: document.getElementById("email").value.trim().toLowerCase(),
           telefone: document.getElementById("telefone").value.replace(/\D/g, ""),
-          arteMarcial: document.getElementById("arte-marcial").value
+          arteMarcial: document.getElementById("arte-marcial").value,
+          ra: document.getElementById("ra").value.trim()
         };
 
-        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.arteMarcial) {
+        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.arteMarcial || !dados.ra) {
           alert("Preencha todos os campos!");
           return;
         }
 
         try {
-          const resposta = await fetch("http://localhost:3100/alunos", {
+          const resposta = await fetch("https://back-projeto-2025.vercel.app/alunos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)

@@ -4,17 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style1.css">
-  <title>Cadastro Professor</title>
+  <title>Cadastro</title>
 </head>
 <body style="background-image: url('fotos/fundoForm2.png'); background-size: cover; margin: 0;">
 
   <form id="formulario" class="box-form">
     <div class="form">
-      <h2 class="Cadastro">Cadastro Professor</h2>
+      
+      <h2 class="Cadastro">Cadastro</h2>
 
       <div class="input-group">
         <label for="nome">Nome Completo</label>
         <input type="text" id="nome" placeholder="Nome Completo" required />
+      </div>
+
+      <div class="input-group">
+        <label for="datanasc">Data de Nascimento</label>
+        <input id="datanasc" type="date" required />
       </div>
 
       <div class="input-group">
@@ -28,31 +34,21 @@
       </div>
 
       <div class="input-group">
-        <label for="cpf">CPF</label>
-        <input type="text" id="cpf" placeholder="CPF" required />
-      </div>
-
-      <div class="input-group">
         <label for="arte-marcial">Arte Marcial</label>
         <select id="arte-marcial" required>
           <option value="">Selecione uma opção</option>
           <option value="capoeira">Capoeira</option>
           <option value="jiu-jitsu">Jiu-Jitsu</option>
-          <option value="karate">Karatê</option>
+          <option value="karatê">Karatê</option>
         </select>
       </div>
 
       <div class="input-group">
-        <label for="datanasc">Data de Nascimento</label>
-        <input type="date" id="datanasc" required />
+        <button type="submit" class="enviar-button">Enviar</button>
       </div>
 
       <div class="input-group">
-        <button type="submit" class="enviar-button">Cadastrar</button>
-      </div>
-
-      <div class="input-group">
-        <button type="button" class="enviar-button" onclick="window.location.href='LoginProfessor.html'">Login</button>
+        <button type="button" class="enviar-button" onclick="window.location.href='login.html'">Login</button>
       </div>
     </div>
   </form>
@@ -66,54 +62,46 @@
 
         const dados = {
           nome: document.getElementById("nome").value.trim(),
+          datanasc: document.getElementById("datanasc").value,
           email: document.getElementById("email").value.trim().toLowerCase(),
           telefone: document.getElementById("telefone").value.replace(/\D/g, ""),
-          cpf: document.getElementById("cpf").value.trim(),
-          arteMarcial: document.getElementById("arte-marcial").value.trim(),
-          datanasc: document.getElementById("datanasc").value
+          arteMarcial: document.getElementById("arte-marcial").value
         };
 
-        if (!dados.nome || !dados.email || !dados.telefone || !dados.cpf || !dados.arteMarcial || !dados.datanasc) {
-          alert("Preencha todos os campos obrigatórios!");
-          return;
-        }
-
-        if (dados.cpf.length !== 11) {
-          alert("CPF inválido. Certifique-se de digitar 11 números.");
+        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.arteMarcial) {
+          alert("Preencha todos os campos!");
           return;
         }
 
         try {
-          const resposta = await fetch("http://localhost:3100/professores", {
+          const resposta = await fetch("https://back-projeto-2025.vercel.app/alunos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
           });
 
-          let resultado;
-          try {
-            resultado = await resposta.json();
-          } catch {
-            resultado = { error: "Resposta inválida do servidor" };
-          }
+          const resultado = await resposta.json();
 
           if (!resposta.ok) {
-            alert("Erro ao cadastrar professor: " + (resultado.error || "Erro desconhecido"));
+            alert("Erro ao cadastrar aluno: " + (resultado.error || "Erro desconhecido"));
+            console.error("Erro do backend:", resultado);
             return;
           }
 
-          alert("Cadastro realizado! Você será redirecionado para o login.");
+          alert("Aluno cadastrado com sucesso!");
           form.reset();
+
           setTimeout(() => {
-            window.location.href = "LoginProfessor.html";
+            window.location.href = "sala.html";
           }, 2000);
 
         } catch (erro) {
           console.error("Erro ao enviar dados:", erro);
-          alert("Erro na conexão com o servidor.");
+          alert("Falha na conexão com o servidor!");
         }
       });
     });
   </script>
+
 </body>
 </html>
