@@ -4,20 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style1.css">
-  <title>Cadastro</title>
+  <title>Cadastro de Aluno</title>
 </head>
 <body style="background-image: url('fotos/fundoForm2.png'); background-size: cover; margin: 0;">
 
   <form id="formulario" class="box-form">
     <div class="form">
-      
-      <h2 class="Cadastro">Cadastro</h2>
+      <h2>Cadastro de Aluno</h2>
 
       <div class="input-group">
         <label for="nome">Nome Completo</label>
         <input type="text" id="nome" placeholder="Nome Completo" required />
       </div>
-        
+
       <div class="input-group">
         <label for="datanasc">Data de Nascimento</label>
         <input id="datanasc" type="date" required />
@@ -33,6 +32,12 @@
         <input type="tel" id="telefone" placeholder="Telefone" required />
       </div>
 
+      <!-- CAMPO RA -->
+      <div class="input-group">
+        <label for="ra">RA do Aluno</label>
+        <input type="number" id="ra" placeholder="Digite o RA" required />
+      </div>
+
       <div class="input-group">
         <label for="arte-marcial">Arte Marcial</label>
         <select id="arte-marcial" required>
@@ -44,12 +49,7 @@
       </div>
 
       <div class="input-group">
-        <label for="ra">RA</label>
-        <input type="text" id="ra" placeholder="Digite seu RA" required />
-      </div>
-
-      <div class="input-group">
-        <button type="submit" class="enviar-button">Enviar</button>
+        <button type="submit" class="enviar-button">Cadastrar</button>
       </div>
 
       <div class="input-group">
@@ -65,40 +65,40 @@
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
+        // CAPTURA DOS DADOS
         const dados = {
           nome: document.getElementById("nome").value.trim(),
           datanasc: document.getElementById("datanasc").value,
           email: document.getElementById("email").value.trim().toLowerCase(),
-          telefone: document.getElementById("telefone").value.replace(/\D/g, ""),
-          arteMarcial: document.getElementById("arte-marcial").value,
-          ra: document.getElementById("ra").value.trim()
+          telefone: document.getElementById("telefone").value.replace(/\D/g, ""), // Remove caracteres não numéricos
+          RA: Number(document.getElementById("ra").value),
+          arteMarcial: document.getElementById("arte-marcial").value
         };
 
-        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.arteMarcial || !dados.ra) {
+        // VALIDAÇÃO
+        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.RA || !dados.arteMarcial) {
           alert("Preencha todos os campos!");
           return;
         }
 
         try {
-          const resposta = await fetch("https://back-projeto-2025.vercel.app/alunos", {
+          // URL corrigida (certifique-se de que o backend está rodando na porta correta)
+          const resposta = await fetch("http://localhost:3000/cadastro", { // Alterado para porta 3000, por exemplo
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
           });
 
-          let resultado;
-          try {
-            resultado = await resposta.json();
-          } catch {
-            resultado = { error: "Resposta inválida do servidor" };
-          }
-
           if (!resposta.ok) {
-            console.error("Erro do backend:", resultado);
-            alert("Erro ao cadastrar aluno: " + (resultado.error || "Erro desconhecido"));
+            const erro = await resposta.json();
+            console.error("Erro do backend:", erro);
+            alert("Erro ao cadastrar aluno: " + (erro.message || "Erro desconhecido"));
             return;
           }
 
+          const resultado = await resposta.json();
+
+          // SALVA NO LOCALSTORAGE (se necessário, mas é melhor guardar no banco)
           let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
           alunos.push(resultado);
           localStorage.setItem("alunos", JSON.stringify(alunos));
@@ -107,7 +107,7 @@
           form.reset();
 
           setTimeout(() => {
-            window.location.href = "sala.html";
+            window.location.href = "sala.html"; // Redireciona para a página de sala
           }, 5000);
 
         } catch (erro) {
