@@ -164,7 +164,7 @@ const remove = async (req, res) => {
   }
 
   try {
-    // verifica primeiro se existe
+    // Verifica primeiro se existe
     const existe = await prisma.aluno.findUnique({ where: { id } });
 
     if (!existe) {

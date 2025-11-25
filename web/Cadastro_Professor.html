@@ -59,63 +59,65 @@
   </form>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("formulario");
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formulario");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-        const dados = {
-          nome: document.getElementById("nome").value.trim(),
-          datanasc: document.getElementById("datanasc").value,
-          email: document.getElementById("email").value.trim().toLowerCase(),
-          telefone: document.getElementById("telefone").value.replace(/\D/g, ""), // Limpar qualquer caractere não numérico
-          arteMarcial: document.getElementById("arte-marcial").value,
-          cpf: document.getElementById("cpf").value.replace(/\D/g, "")  // Limpar qualquer caractere não numérico do CPF
-        };
+      const dados = {
+        nome: document.getElementById("nome").value.trim(),
+        datanasc: document.getElementById("datanasc").value,
+        email: document.getElementById("email").value.trim().toLowerCase(),
+        telefone: document.getElementById("telefone").value.replace(/\D/g, ""), // Limpar caracteres não numéricos
+        arteMarcial: document.getElementById("arte-marcial").value,
+        cpf: document.getElementById("cpf").value.replace(/\D/g, "")  // Limpar caracteres não numéricos do CPF
+      };
 
-        // Validação simples
-        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.arteMarcial || !dados.cpf) {
-          alert("Preencha todos os campos!");
+      // Validação simples
+      if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.arteMarcial || !dados.cpf) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      // Verificar se o CPF tem 11 caracteres
+      if (dados.cpf.length !== 11) {
+        alert("CPF inválido! O CPF deve ter 11 números.");
+        return;
+      }
+
+      try {
+        // 🔹 Corrigido: rota do backend sem /api
+        const resposta = await fetch("http://localhost:3100/professores", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+          alert("Erro ao cadastrar professor: " + (resultado.error || "Erro desconhecido"));
+          console.error("Erro do backend:", resultado);
           return;
         }
 
-        // Verificar se o CPF tem 11 caracteres
-        if (dados.cpf.length !== 11) {
-          alert("CPF inválido! O CPF deve ter 11 números.");
-          return;
-        }
+        alert("Professor cadastrado com sucesso!");
+        form.reset(); // Limpar o formulário
 
-        try {
-          const resposta = await fetch("http://localhost:3100/api/professores", { // Altere para a URL correta do seu backend
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(dados)
-          });
+        // Redirecionar para a página de login após 2 segundos
+        setTimeout(() => {
+          window.location.href = "LoginProfessor.html";
+        }, 2000);
 
-          const resultado = await resposta.json();
-
-          if (!resposta.ok) {
-            alert("Erro ao cadastrar professor: " + (resultado.error || "Erro desconhecido"));
-            console.error("Erro do backend:", resultado);
-            return;
-          }
-
-          alert("Professor cadastrado com sucesso!");
-          form.reset(); // Limpar o formulário
-
-          // Redirecionar para a página de login após 2 segundos
-          setTimeout(() => {
-            window.location.href = "LoginProfessor.html"; // Redirecionar para a tela de login
-          }, 2000);
-
-        } catch (erro) {
-          console.error("Erro ao enviar dados:", erro);
-          alert("Falha na conexão com o servidor!");
-        }
-      });
+      } catch (erro) {
+        console.error("Erro ao enviar dados:", erro);
+        alert("Falha na conexão com o servidor!");
+      }
     });
-  </script>
+  });
+</script>
+
 
 </body>
 </html>

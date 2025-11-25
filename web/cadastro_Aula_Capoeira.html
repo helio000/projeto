@@ -32,7 +32,6 @@
         <input type="tel" id="telefone" placeholder="Telefone" required />
       </div>
 
-      <!-- CAMPO RA -->
       <div class="input-group">
         <label for="ra">RA do Aluno</label>
         <input type="number" id="ra" placeholder="Digite o RA" required />
@@ -59,64 +58,44 @@
   </form>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("formulario");
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formulario");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-        // CAPTURA DOS DADOS
-        const dados = {
-          nome: document.getElementById("nome").value.trim(),
-          datanasc: document.getElementById("datanasc").value,
-          email: document.getElementById("email").value.trim().toLowerCase(),
-          telefone: document.getElementById("telefone").value.replace(/\D/g, ""), // Remove caracteres não numéricos
-          RA: Number(document.getElementById("ra").value),
-          arteMarcial: document.getElementById("arte-marcial").value
-        };
+      const dados = {
+        nome: document.getElementById("nome").value.trim(),
+        datanasc: document.getElementById("datanasc").value,
+        email: document.getElementById("email").value.trim().toLowerCase(),
+        telefone: document.getElementById("telefone").value.replace(/\D/g, ""),
+        RA: Number(document.getElementById("ra").value),
+        arteMarcial: document.getElementById("arte-marcial").value
+      };
 
-        // VALIDAÇÃO
-        if (!dados.nome || !dados.datanasc || !dados.email || !dados.telefone || !dados.RA || !dados.arteMarcial) {
-          alert("Preencha todos os campos!");
+      try {
+        const resposta = await fetch("http://localhost:3100/alunos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+          alert("Erro: " + resultado.error);
           return;
         }
 
-        try {
-          // URL corrigida (certifique-se de que o backend está rodando na porta correta)
-          const resposta = await fetch("http://localhost:3000/cadastro", { // Alterado para porta 3000, por exemplo
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(dados)
-          });
-
-          if (!resposta.ok) {
-            const erro = await resposta.json();
-            console.error("Erro do backend:", erro);
-            alert("Erro ao cadastrar aluno: " + (erro.message || "Erro desconhecido"));
-            return;
-          }
-
-          const resultado = await resposta.json();
-
-          // SALVA NO LOCALSTORAGE (se necessário, mas é melhor guardar no banco)
-          let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
-          alunos.push(resultado);
-          localStorage.setItem("alunos", JSON.stringify(alunos));
-
-          alert("Aluno cadastrado com sucesso! Você será redirecionado para a sala em 5 segundos.");
-          form.reset();
-
-          setTimeout(() => {
-            window.location.href = "sala.html"; // Redireciona para a página de sala
-          }, 5000);
-
-        } catch (erro) {
-          console.error("Erro ao enviar dados para o servidor:", erro);
-          alert("Erro na conexão com o servidor.");
-        }
-      });
+        alert("Aluno cadastrado com sucesso!");
+        form.reset();
+      } catch (erro) {
+        alert("Erro ao conectar com o servidor.");
+      }
     });
-  </script>
+  });
+</script>
+
 
 </body>
 </html>

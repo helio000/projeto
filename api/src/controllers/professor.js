@@ -31,16 +31,16 @@ const create = async (req, res) => {
         nome: nome.trim(),
         email: email.trim().toLowerCase(),
         telefone: telefone.trim(),
-        arteMarcial: arteMarcial?.trim(),
+        arteMarcial: arteMarcial?.trim() || null,  // Se não for fornecido, deixa como null
         datanasc: dataNascimento,
         cpf: cpf.trim()
       },
     });
 
-    res.status(201).json(professor);
+    res.status(201).json(professor); // Retorna o professor criado
   } catch (error) {
     console.error("Erro ao criar professor:", error);
-    res.status(500).json({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor ao criar professor." });
   }
 };
 
@@ -51,7 +51,7 @@ const read = async (req, res) => {
     res.status(200).json(professores);
   } catch (error) {
     console.error("Erro ao buscar professores:", error);
-    res.status(500).json({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor ao listar professores." });
   }
 };
 
@@ -66,7 +66,7 @@ const readOne = async (req, res) => {
     res.status(200).json(professor);
   } catch (error) {
     console.error("Erro ao buscar professor:", error);
-    res.status(500).json({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor ao buscar professor." });
   }
 };
 
@@ -76,8 +76,9 @@ const update = async (req, res) => {
   if (isNaN(idNum)) return res.status(400).json({ error: "ID inválido" });
 
   try {
-    const { email, cpf, ...rest } = req.body;
+    const { email, cpf, telefone, arteMarcial, datanasc, nome } = req.body;
 
+    // Verifica se já existe outro professor com o mesmo email ou cpf
     if (email) {
       const existing = await prisma.professor.findUnique({ where: { email: email.trim().toLowerCase() } });
       if (existing && existing.id !== idNum) return res.status(400).json({ error: 'Email já existe para outro professor!' });
@@ -92,16 +93,19 @@ const update = async (req, res) => {
     const professor = await prisma.professor.update({
       where: { id: idNum },
       data: {
+        nome: nome?.trim(),
         email: email?.trim().toLowerCase(),
-        cpf: cpf?.trim(),
-        ...rest
+        telefone: telefone?.trim(),
+        arteMarcial: arteMarcial?.trim() || null,  // Se não for fornecido, mantém null
+        datanasc: datanasc ? new Date(datanasc) : undefined,  // Caso a data não seja fornecida, não atualiza
+        cpf: cpf?.trim()
       },
     });
 
     res.status(200).json(professor);
   } catch (error) {
     console.error("Erro ao atualizar professor:", error);
-    res.status(500).json({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor ao atualizar professor." });
   }
 };
 
@@ -115,7 +119,7 @@ const remove = async (req, res) => {
     res.status(200).json({ message: 'Professor removido com sucesso' });
   } catch (error) {
     console.error("Erro ao remover professor:", error);
-    res.status(500).json({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor ao remover professor." });
   }
 };
 
@@ -132,10 +136,11 @@ const loginProfessor = async (req, res) => {
 
     if (!professor) return res.status(401).json({ error: "Nome ou e-mail incorretos" });
 
+    // Para fins de login, retorna o professor com um status 200
     res.status(200).json({ message: "Login realizado com sucesso!", professor });
   } catch (error) {
     console.error("Erro no login do professor:", error);
-    res.status(500).json({ error: "Erro interno do servidor." });
+    res.status(500).json({ error: "Erro interno do servidor durante o login." });
   }
 };
 
