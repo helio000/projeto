@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style1.css">
   <title>Login Professor</title>
 </head>
-<body style="background-image: url('fotos/fundoForm2.png'); background-size: cover; margin: 0;">
+<body style="background-image: url('fotos/fundo-principal.png'); background-size: cover; margin: 0;">
 
   <form id="login-form" class="box-form">
     <div class="form">
@@ -48,7 +48,8 @@
         }
 
         try {
-          const resposta = await fetch("http://localhost:3100/professores/login", {
+          // 🔹 Atualize aqui com o backend online
+          const resposta = await fetch("https://back-projeto-2025-12.onrender.com/professores/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nome, email })
@@ -79,4 +80,3 @@
   </script>
 </body>
 </html>
-
